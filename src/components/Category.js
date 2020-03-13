@@ -10,18 +10,11 @@ const Container = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
-const Type = styled.div`
-  justify-content: center;
-  align-items: center;
-  height: 42px;
-  border-radius: 20px;
-  /* border: 1px solid gray; */
-`;
 
 const Category = ({ Categories }) => (
   <Container>
     {Categories?.length > 0
-      ? Categories.map((type, index) => <Type key={index}>{type}</Type>)
+      ? Categories.map((Type, index) => <Type key={index}></Type>)
       : null}
   </Container>
 );

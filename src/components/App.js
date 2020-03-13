@@ -39,13 +39,13 @@ function App() {
         <BrandList Brands={[Cu, Gs, Seven, Emart]} />
         <Category
           Categories={[
-            <Breakfast />,
-            <Icecream />,
-            <Chip />,
-            <Lemonade />,
-            <Soap />,
-            <Tissue />,
-            <Candy />
+            Breakfast,
+            Icecream,
+            Chip,
+            Lemonade,
+            Soap,
+            Tissue,
+            Candy
           ]}
         />
         <Footer>Footer</Footer>
