@@ -11,16 +11,16 @@ const Container = styled.div`
   margin-bottom: 18.5px;
 `;
 
-const BrandList = ({ Brands }) => (
+const BrandList = ({ BrandLogos }) => (
   <Container>
-    {Brands?.length > 0
-      ? Brands.map((Brand, index) => <Brand key={index}></Brand>)
+    {BrandLogos?.length > 0
+      ? BrandLogos.map((Brand, index) => <Brand key={index} />)
       : null}
   </Container>
 );
 
 BrandList.propTypes = {
-  Brands: PropTypes.array
+  BrandLogos: PropTypes.array
 };
 
 export default BrandList;

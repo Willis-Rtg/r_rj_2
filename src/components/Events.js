@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-const Container = styled.View`
+const Container = styled.div`
+  width: 100%;
   margin-top: 15px;
-  flex-direction: row;
+  display: flex;
   justify-content: space-around;
 `;
-const Text = styled.Text`
+const Text = styled.span`
   padding-horizontal: 20px;
   font-size: 20px;
   border: 1px solid black;

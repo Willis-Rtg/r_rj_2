@@ -11,16 +11,16 @@ const Container = styled.div`
   /* background-color: lightblue; */
 `;
 
-const Category = ({ Categories }) => (
+const Category = ({ CategoryIcons }) => (
   <Container>
-    {Categories?.length > 0
-      ? Categories.map((Type, index) => <Type key={index}></Type>)
+    {CategoryIcons?.length > 0
+      ? CategoryIcons.map((Type, index) => <Type key={index}></Type>)
       : null}
   </Container>
 );
 
 Category.propTypes = {
-  Categories: PropTypes.array
+  CategoryIcons: PropTypes.array
 };
 
 export default Category;
