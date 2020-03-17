@@ -6,14 +6,4 @@ import Soap from "../assets/images/Soap";
 import Tissue from "../assets/images/Tissue";
 import Candy from "../assets/images/Candy";
 
-const CategoryIcons = [
-  Breakfast,
-  Icecream,
-  Chip,
-  Lemonade,
-  Soap,
-  Tissue,
-  Candy
-];
-
-export default CategoryIcons;
+export default [Breakfast, Icecream, Chip, Lemonade, Soap, Tissue, Candy];
