@@ -3,6 +3,4 @@ import Gs from "../assets/images/Gs";
 import Seven from "../assets/images/Seven";
 import Emart from "../assets/images/Emart";
 
-const BrandLogos = [Cu, Gs, Seven, Emart];
-
-export default BrandLogos;
+export default [Cu, Gs, Seven, Emart];
