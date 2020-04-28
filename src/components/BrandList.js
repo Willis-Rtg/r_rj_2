@@ -11,11 +11,12 @@ const Container = styled.div`
   margin-bottom: 18.5px;
 `;
 
-const BrandList = ({ BrandLogos }) => (
+const BrandList = ({ BrandLogos, callApi }) => (
   <Container>
-    {BrandLogos?.length > 0
-      ? BrandLogos.map((Brand, index) => <Brand key={index} />)
-      : null}
+    {
+      BrandLogos?.map((Brand, index) => 
+      <Brand key={index} onClick={() => callApi(index)} />)
+     }
   </Container>
 );
 
