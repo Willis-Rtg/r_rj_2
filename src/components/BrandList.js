@@ -13,15 +13,14 @@ const Container = styled.div`
 
 const BrandList = ({ BrandLogos, callApi }) => (
   <Container>
-    {
-      BrandLogos?.map((Brand, index) => 
-      <Brand key={index} onClick={() => callApi(index)} />)
-     }
+    {BrandLogos?.map((Brand, index) => (
+      <Brand key={index} onClick={() => callApi(index)} />
+    ))}
   </Container>
 );
 
 BrandList.propTypes = {
-  BrandLogos: PropTypes.array
+  BrandLogos: PropTypes.array,
 };
 
 export default BrandList;
