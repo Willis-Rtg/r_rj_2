@@ -28,7 +28,7 @@ const Admin = () => {
 
   const callApi = async (brand) => {
     console.log("App -> brand", brand);
-    if (brand === 0) getData(await getConvenience.getCu());
+    if (brand === 0) await getData(await getConvenience.getCu());
     if (brand === 1) getData(await getConvenience.getGs());
     if (brand === 2) getData(await getConvenience.getSeven11());
     if (brand === 3) getData(await getConvenience.getEmart());

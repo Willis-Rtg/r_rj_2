@@ -2,23 +2,27 @@ import Axios from "axios";
 
 const api = Axios.create();
 let domparser = new DOMParser();
-let mergeProducts = [];
+let doc;
+let mergeList = [];
+let prodList;
 
-const getCu = async (pageIndex = 1) => {
-  await Axios.get("http://cu.bgfretail.com/event/plusAjax.do", {
+const getCu = async (pageIndex = 20) => {
+  const { data } = await api.get("http://cu.bgfretail.com/event/plusAjax.do", {
     params: { pageIndex, listType: 1 },
-  }).then(({ data }) => {
-    let doc = domparser.parseFromString(data, "text/html");
-    let products = doc.querySelectorAll("body li");
-    mergeProducts = [...mergeProducts, ...products];
-    console.log("getCu -> products", mergeProducts);
-    if (!products.length) {
-      console.log("done");
-    }
-    // console.log("getCu -> pageIndex", pageIndex);
-    getCu(++pageIndex);
   });
-  return mergeProducts;
+  doc = domparser.parseFromString(data, "text/html");
+  prodList = doc.querySelectorAll("body li");
+  console.log("doc", doc);
+  console.log("prodList", prodList);
+  console.log("prodList.length", prodList.length);
+  mergeList = [...mergeList, ...prodList];
+  if (!prodList.length) {
+    console.log("done");
+    console.log("mergeList", mergeList);
+    return mergeList;
+  } else {
+    await getCu(++pageIndex);
+  }
 };
 
 const getGs = async () => {
@@ -61,15 +65,19 @@ const getSeven11 = async () => {
 const getEmart = async () => {
   console.log("getEmart");
   let doc;
-  const { data } = await api.get(
-    "https://www.emart24.co.kr/product/eventProduct.asp",
-    {
-      params: { productCategory: null, cpage: 1 },
-    }
-  );
-  doc = domparser.parseFromString(data, "text/html");
-  const list = doc.querySelectorAll(".categoryListNew > li");
-  console.log("getEmart -> list", list);
+  const axiosGet = async () => {
+    const { data } = await api.get(
+      "https://www.emart24.co.kr/product/eventProduct.asp",
+      {
+        params: { productCategory: 1, cpage: 1 },
+      }
+    );
+    doc = domparser.parseFromString(data, "text/html");
+    const list = doc.querySelectorAll(".categoryListNew > li");
+    console.log("getEmart -> doc", doc);
+    console.log("getEmart -> list", list);
+    return data;
+  };
 };
 
 const getConvenience = {
