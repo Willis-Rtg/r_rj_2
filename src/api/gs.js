@@ -1,0 +1,13 @@
+export default async (api) => {
+  const { data } = await api.get(
+    "http://gs25.gsretail.com/gscvs/ko/products/event-goods-search",
+    {
+      params: {
+        pageSize: 2000,
+      },
+    }
+  );
+  // console.log("getGs -> gsProducts", JSON.parse(data));
+  const { results } = JSON.parse(data);
+  return results;
+};

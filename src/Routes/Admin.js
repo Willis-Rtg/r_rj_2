@@ -6,7 +6,7 @@ import BrandLogos from "../components/BrandLogos";
 import Category from "../components/Category";
 import CategoryIcons from "../components/CategoryIcons";
 import Events from "../components/Events";
-import getConvenience from "../api";
+import getConvenience from "../api/api";
 import ProductList from "../components/ProductList";
 
 const AppContainer = styled.div`
@@ -28,10 +28,10 @@ const Admin = () => {
 
   const callApi = async (brand) => {
     console.log("App -> brand", brand);
-    if (brand === 0) await getData(await getConvenience.getCu());
-    if (brand === 1) getData(await getConvenience.getGs());
-    if (brand === 2) getData(await getConvenience.getSeven11());
-    if (brand === 3) getData(await getConvenience.getEmart());
+    if (brand === 0) getData(await getConvenience.cu());
+    if (brand === 1) getData(await getConvenience.gs());
+    if (brand === 2) getData(await getConvenience.seven());
+    if (brand === 3) getData(await getConvenience.emart());
   };
   if (dataList) {
     console.log("callApi -> dataList", dataList);
