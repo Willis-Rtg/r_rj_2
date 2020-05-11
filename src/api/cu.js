@@ -8,7 +8,7 @@ export default async (api, domparser, doc, mergeList, prodList) => {
       }
     );
     doc = domparser.parseFromString(data, "text/html");
-    prodList = doc.querySelectorAll("body li");
+    prodList = doc.querySelectorAll("body > ul > li");
     mergeList = [...mergeList, ...prodList];
     if (!prodList.length) {
       return mergeList;
