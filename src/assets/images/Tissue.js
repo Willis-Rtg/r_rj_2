@@ -3,7 +3,7 @@ import React from "react";
 
 function Tissue(props) {
   return (
-    <svg width={58} height={58} viewBox="0 -17 512 512" {...props}>
+    <svg width={57} height={57} viewBox="0 -17 512 512" {...props}>
       <path
         d="M409.6 75.736c-34.133 25.6-68.267 85.333-68.267 145.067h-153.6c-36.693-35.183-52.796-86.716-42.667-136.533C213.333 161.069 256 41.602 409.6 75.736z"
         data-original="#CCD5DA"

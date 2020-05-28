@@ -24,7 +24,6 @@ const ProdCate = styled.p`
 `;
 
 export default (props) => {
-  // console.log("props", props);
   return (
     <Container>
       <ProdName>{props.name}</ProdName>

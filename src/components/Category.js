@@ -10,17 +10,24 @@ const Container = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
+const AllEtc = styled.div`
+  font-size: 22px;
+  text-align: center;
+  width: 65px;
+`;
 
 const Category = ({ CategoryIcons }) => (
   <Container>
+    <AllEtc>All</AllEtc>
     {CategoryIcons?.length > 0
       ? CategoryIcons.map((Type, index) => <Type key={index}></Type>)
       : null}
+    <AllEtc>Etc.</AllEtc>
   </Container>
 );
 
 Category.propTypes = {
-  CategoryIcons: PropTypes.array
+  CategoryIcons: PropTypes.array,
 };
 
 export default Category;

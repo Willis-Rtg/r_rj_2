@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Header from "../components/Header";
-import BrandList from "../components/BrandList";
-import BrandLogos from "../components/BrandLogos";
-import Category from "../components/Category";
-import CategoryIcons from "../components/CategoryIcons";
-import Events from "../components/Events";
+import Header from "../Components/Header";
+import BrandList from "../Components/BrandList";
+import BrandLogos from "../Components/BrandLogos";
+import Category from "../Components/Category";
+import CategoryIcons from "../Components/CategoryIcons";
+import Events from "../Components/Events";
 import getConvenience from "../api/api";
-import ProductList from "../components/ProductList";
+import ProductList from "../Components/ProductList";
 
 const AppContainer = styled.div`
   width: 100%;

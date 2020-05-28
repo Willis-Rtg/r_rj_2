@@ -19,16 +19,16 @@ export default ({ Brand, DataList }) => {
   return (
     <Container>
       {DataList?.map((item, index) => {
-        if (Brand === "gs")
+        Brand === "gs" &&
           setProps(item.goodsNm, item.attFileNm, item.eventTypeNm, item.price);
-        else if (Brand === "cu")
+        Brand === "cu" &&
           setProps(
             item.querySelector(".prodName a")?.textContent,
             item.querySelector("img")?.getAttribute("src"),
             item.querySelector("ul li")?.textContent,
             item.querySelector(".prodPrice")?.textContent
           );
-        else if (Brand === "seven")
+        Brand === "seven" &&
           setProps(
             item.querySelector(".name")?.textContent,
             "https://7-eleven.co.kr" +
@@ -36,7 +36,7 @@ export default ({ Brand, DataList }) => {
             item.querySelector(".ico_tag_07")?.textContent,
             item.querySelector(".price")?.textContent
           );
-        else if (Brand === "emart")
+        Brand === "emart" &&
           setProps(
             item.querySelector(".productDiv")?.textContent,
             "https://www.emart24.co.kr/" +
