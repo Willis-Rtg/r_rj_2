@@ -1,6 +1,30 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import Product from "./Product";
+// import Product from "./Product";
+import { useMutation } from "@apollo/react-hooks";
+import { gql } from "apollo-boost";
+
+export const CREATE_PRODUCT = gql`
+  mutation createProduct(
+    $name: string!
+    $brand: string!
+    $event: string!
+    $img: string
+    $price: string!
+    $category: string
+    $description: string
+  ) {
+    createProduct(
+      name: $name
+      brand: $brand
+      event: $event
+      img: $img
+      price: $price
+      category: $category
+      description: $description
+    )
+  }
+`;
 
 const Container = styled.div`
   display: flex;
@@ -9,26 +33,66 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default ({ Brand, DataList }) => {
-  console.log("DataList", DataList);
-  console.log("brand", Brand);
+const Product = styled.div`
+  width: 70px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid black;
+`;
+
+const ProdName = styled.p`
+  font-size: 12.5px;
+`;
+const ProdImg = styled.div`
+  background-image: url(${(props) => props.src});
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+`;
+const ProdCate = styled.p`
+  font-size: 12.5px;
+`;
+const Button = styled.button``;
+
+export default ({ Brand: brand, DataList }) => {
+  console.log("brand", brand);
   let props;
+  let brnad, name, img, event, price, category, description;
+  let info;
   const setProps = (name, img, event, price) => {
-    return (props = { name, img, event, price });
+    console.log("setProps -> name", name);
+    return name, img, event, price;
   };
+
+  const { createProduct } = useMutation(CREATE_PRODUCT, {
+    variables: {
+      brnad,
+      name,
+      event,
+      img,
+      price,
+      category,
+      description,
+    },
+  });
   return (
     <Container>
+      <Button onClick={() => createProduct()}>insert</Button>
       {DataList?.map((item, index) => {
-        Brand === "gs" &&
+        brand === "gs" &&
           setProps(item.goodsNm, item.attFileNm, item.eventTypeNm, item.price);
-        Brand === "cu" &&
+
+        brand === "cu" &&
           setProps(
             item.querySelector(".prodName a")?.textContent,
             item.querySelector("img")?.getAttribute("src"),
             item.querySelector("ul li")?.textContent,
             item.querySelector(".prodPrice")?.textContent
           );
-        Brand === "seven" &&
+        brand === "seven" &&
           setProps(
             item.querySelector(".name")?.textContent,
             "https://7-eleven.co.kr" +
@@ -36,7 +100,7 @@ export default ({ Brand, DataList }) => {
             item.querySelector(".ico_tag_07")?.textContent,
             item.querySelector(".price")?.textContent
           );
-        Brand === "emart" &&
+        brand === "emart" &&
           setProps(
             item.querySelector(".productDiv")?.textContent,
             "https://www.emart24.co.kr/" +
@@ -44,7 +108,14 @@ export default ({ Brand, DataList }) => {
             item.querySelector(".lable img")?.getAttribute("alt").substr(0, 5),
             item.querySelector(".price")?.textContent
           );
-        return <Product key={index} {...props} />;
+        return (
+          <Product key={index}>
+            <ProdName>{name}</ProdName>
+            <ProdImg src={img} />
+            <ProdCate>{event}</ProdCate>
+            <>{price}</>
+          </Product>
+        );
       })}
     </Container>
   );

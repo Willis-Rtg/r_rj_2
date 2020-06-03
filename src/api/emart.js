@@ -10,7 +10,7 @@ export default async (api, domparser, doc, mergeList, prodList) => {
     doc = domparser.parseFromString(data, "text/html");
     prodList = doc.querySelectorAll(".categoryListNew > li");
     mergeList = [...mergeList, ...prodList];
-    if (prodList[0].getAttribute("class") == "nodata") {
+    if (prodList[0].getAttribute("class") === "nodata") {
       return mergeList;
     } else await axiosGet(++cpage);
   };

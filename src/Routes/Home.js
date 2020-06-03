@@ -21,7 +21,7 @@ const Conatiner = styled.div`
 `;
 const Footer = styled.section``;
 
-function App() {
+function Home() {
   return (
     <AppContainer>
       <Conatiner>
@@ -35,4 +35,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
