@@ -21,7 +21,7 @@ const Conatiner = styled.div`
   align-items: center;
 `;
 
-const Admin = ({ data, callApi }) => {
+const Admin = ({ brand, dataList, callApi }) => {
   return (
     <AppContainer>
       <Conatiner>
@@ -29,7 +29,7 @@ const Admin = ({ data, callApi }) => {
         <BrandList BrandLogos={BrandLogos} callApi={callApi} />
         <Category CategoryIcons={CategoryIcons} />
         <Events />
-        <ProductList Brand={data.brand} DataList={data.list}></ProductList>
+        <ProductList dataList={dataList} brand={brand} />
       </Conatiner>
     </AppContainer>
   );

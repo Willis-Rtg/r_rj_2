@@ -13,7 +13,7 @@ let prodList;
 const getConvenience = {
   cu: async () => await cu(api, domparser, doc, mergeList, prodList),
   gs: () => gs(api),
-  seven: () => seven(api, domparser, doc, mergeList, prodList),
+  seven: async () => await seven(api, domparser, doc, mergeList, prodList),
   emart: () => emart(api, domparser, doc, mergeList, prodList),
 };
 

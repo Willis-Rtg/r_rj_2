@@ -1,29 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { useMutation } from "@apollo/react-hooks";
-import { gql } from "apollo-boost";
-
-export const CREATE_PRODUCT = gql`
-  mutation createProduct(
-    $name: string!
-    $brand: string!
-    $event: string!
-    $img: string
-    $price: string!
-    $category: string
-    $description: string
-  ) {
-    createProduct(
-      name: $name
-      brand: $brand
-      event: $event
-      img: $img
-      price: $price
-      category: $category
-      description: $description
-    )
-  }
-`;
 
 const Container = styled.div`
   width: 70px;
@@ -34,38 +10,27 @@ const Container = styled.div`
   text-align: center;
   border: 1px solid black;
 `;
-const ProdName = styled.p`
+const Name = styled.p`
   font-size: 12.5px;
 `;
-const ProdImg = styled.div`
+const Img = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
   width: 50px;
   height: 50px;
 `;
-const ProdCate = styled.p`
+const Event = styled.p`
   font-size: 12.5px;
 `;
+const Price = styled.p``;
 
-export default ({
-  name,
-  img = null,
-  event,
-  price,
-  brand = "",
-  category = null,
-  description = null,
-}) => {
-  const { createProduct } = useMutation(CREATE_PRODUCT, {
-    variables: {
-      name,
-      brand,
-      event,
-      img,
-      price,
-      category,
-      description,
-    },
-  });
-  return <Container></Container>;
+export default ({ name, img, event, price }) => {
+  return (
+    <Container className="product">
+      <Name className="name">{name}</Name>
+      <Img className="img" src={img} />
+      <Event className="event">{event}</Event>
+      <Price className="price">{price}</Price>
+    </Container>
+  );
 };

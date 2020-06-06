@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import AdminPresenter from "./AdminPresenter";
 import getConvenience from "../../api/api";
+import { useMutation } from "@apollo/react-hooks";
+import { CREATE_PRODUCT } from "./AdminQueries";
 
 export default () => {
   const [data, setData] = useState({ list: [], brand: "" });
+  const { createProduct } = useMutation(CREATE_PRODUCT, { variables: {} });
 
   const callApi = async (brand) => {
     console.log("App -> brand", brand);
@@ -15,5 +18,7 @@ export default () => {
       setData({ list: await getConvenience.emart(), brand: "emart" });
   };
 
-  return <AdminPresenter data={data} callApi={callApi} />;
+  return (
+    <AdminPresenter brand={data.brand} dataList={data.list} callApi={callApi} />
+  );
 };
