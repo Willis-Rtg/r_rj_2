@@ -6,7 +6,7 @@ import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
 import ProductList from "../../Components/Product/ProductList";
 import Modal from "../../Components/Modal/Modal";
-import Login from "../../Components/Login/Login";
+import Portal from "../../Components/Modal/Portal";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -38,15 +38,12 @@ const Categories = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
-const ModalRoot = styled.div`
-  position: relative;
-`;
 
 const HomePresenter = ({
   brand,
   dataList,
   callApi,
-  modalVisible,
+  modal,
   openModal,
   closeModal,
 }) => {
@@ -65,18 +62,12 @@ const HomePresenter = ({
           ))}
         </Categories>
         <Events />
-        <div id="root"></div>
-        <ModalRoot id="modal-root"></ModalRoot>
-        <button onClick={openModal}>Open Modal</button>
-        {modalVisible && (
-          <Modal
-            visible={modalVisible}
-            closable={true}
-            maskClosable={true}
-            onClose={closeModal}
-          >
-            <Login />
-          </Modal>
+        <div id="modal"></div>
+        <button onClick={openModal}>Modal</button>
+        {modal && (
+          <Portal>
+            <Modal closeModal={closeModal} />
+          </Portal>
         )}
         <ProductList />
       </Conatiner>

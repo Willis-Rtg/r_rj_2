@@ -1,105 +1,117 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import styled from "styled-components";
-import Portal from "./Portal";
 
+// const { width, height } = Dimension;
+
+const ModalBg = styled.div`
+  background: rgba(0, 0, 0, 0.25);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 const ModalWrapper = styled.div`
-  box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  overflow: auto;
-  outline: 0;
-`;
-
-const ModalOverlay = styled.div`
-  box-sizing: border-box;
-  display: ${(props) => (props.visible ? "block" : "none")};
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-`;
-
-const ModalInner = styled.div`
-  box-sizing: border-box;
-  position: relative;
-  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: #fff;
-  border-radius: 10px;
-  width: 360px;
-  max-width: 480px;
-  top: 50%;
-  transform: translateY(-50%);
-  margin: 0 auto;
-  padding: 20px 20px 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.75rem;
+  width: 22%;
+  min-width: 260px;
+  background-color: white;
+  border-radius: 17px;
 `;
 const ModalHeader = styled.div`
+  width: 100%;
+  padding: 8px 10px;
+  position: relative;
+  font-size: 18px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
 `;
+const ModalTitle = styled.div``;
 const CloseBtn = styled.button`
-  border: 0px;
-  border-radius: 10px;
+  position: absolute;
+  top: -13px;
+  right: 0px;
+  border: 0;
+  font-size: 17px;
+  border-radius: 20px;
+`;
+const ModalContent = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 7px;
+`;
+const Form = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 12.5px;
+`;
+const Input = styled.input`
+  width: 75%;
+  margin: 3px 0;
+`;
+const SocialBtns = styled.div`
+  width: 75%;
+  display: flex;
+  justify-content: space-around;
 `;
 
-const Modal = ({
-  className,
-  onClose,
-  maskClosable = true,
-  closable = true,
-  visible = false,
-  children,
-}) => {
-  const onMaskClick = (e) => {
-    if (e.target === e.currentTarget) {
-      onClose(e);
-    }
-  };
-  const close = (e) => {
-    if (onClose) {
-      onClose(e);
-    }
-  };
-
-  useEffect(() => {
-    document.body.style.cssText = `position: fixed; top: -${window.scrollY}px`;
-    return () => {
-      const scrollY = document.body.style.top;
-      document.body.style.cssText = `position: ""; top: "";`;
-      window.scrollTo(0, parseInt(scrollY || "0") * -1);
-    };
-  }, []);
-
+const Modal = ({ closeModal }) => {
   return (
-    <Portal elementId="modal-root">
-      <ModalOverlay visible={visible} />
-      <ModalWrapper
-        className={className}
-        onClick={maskClosable ? onMaskClick : null}
-        tabIndex={-1}
-        visible={visible}
-      >
-        <ModalInner tabIndex={0} className="modal-inner">
-          <ModalHeader>
-            <CloseBtn onClick={close}>{closable && "X"}</CloseBtn>
-          </ModalHeader>
-          {children}
-        </ModalInner>
+    <ModalBg>
+      <ModalWrapper>
+        <ModalHeader>
+          <ModalTitle>회원가입</ModalTitle>
+          <CloseBtn onClick={closeModal}>X</CloseBtn>
+        </ModalHeader>
+        <ModalContent>
+          <Form>
+            <Input placeholder="닉네임" />
+            <Input placeholder="이메일" />
+            <Input placeholder="비밀번호" />
+            <Input placeholder="비밀먼호 확인" />
+            <button type="submit">submit</button>
+          </Form>
+          Login
+          <SocialBtns>
+            <img
+              width="35"
+              height="35"
+              src={require("../../assets/social-logos/small-naver.png")}
+              alt="Naver login"
+            />
+            <img
+              width="35"
+              height="35"
+              src={require("../../assets/social-logos/small-google.png")}
+              alt="Google login"
+            />
+            <img
+              width="35"
+              height="35"
+              src={require("../../assets/social-logos/small-facebook.png")}
+              alt="Facebook login"
+            />
+            <img
+              width="35"
+              height="35"
+              src={require("../../assets/social-logos/small-kakao2.png")}
+              alt="Kakao login"
+            />
+          </SocialBtns>
+        </ModalContent>
       </ModalWrapper>
-    </Portal>
+    </ModalBg>
   );
-};
-
-Modal.propTypes = {
-  visible: PropTypes.bool,
 };
 
 export default Modal;

@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import HomePresenter from "./HomePresenter";
-import useInput from "../../Hooks/useInput";
 
 const HomeContainer = () => {
   const [dataList, setDataList] = useState({});
   const callApi = () => {};
-  const [modalVisible, setModalVisible] = useState(false);
-  const openModal = () => {
-    setModalVisible(true);
-  };
-  const closeModal = () => {
-    setModalVisible(false);
-  };
-  const email = useInput("");
+  const [modal, setModal] = useState();
+  const openModal = () => setModal(true);
+  const closeModal = () => setModal(false);
 
   return (
     <HomePresenter
       callApi={callApi}
       dataList={dataList}
-      modalVisible={modalVisible}
+      modal={modal}
       openModal={openModal}
       closeModal={closeModal}
     />
