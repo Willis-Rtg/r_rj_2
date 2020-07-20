@@ -19,7 +19,7 @@ const ModalWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   padding: 1.75rem;
-  width: 22%;
+  width: 21%;
   min-width: 260px;
   background-color: white;
   border-radius: 17px;
@@ -104,7 +104,7 @@ const Modal = ({ closeModal }) => {
             <img
               width="35"
               height="35"
-              src={require("../../assets/social-logos/small-kakao2.png")}
+              src={require("../../assets/social-logos/small-kakao.png")}
               alt="Kakao login"
             />
           </SocialBtns>
