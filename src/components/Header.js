@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import LoginBtn from "./LoginBtn";
+import LoginBtn from "./Login/LoginBtn";
 
 const Conatiner = styled.div`
   flex: 1;

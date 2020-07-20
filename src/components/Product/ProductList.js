@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Product from "./Product";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { CREATE_PRODUCT } from "../Routes/Admin/AdminQueries";
+import { CREATE_PRODUCT } from "../../Routes/Admin/AdminQueries";
 
 const Container = styled.div`
   display: flex;

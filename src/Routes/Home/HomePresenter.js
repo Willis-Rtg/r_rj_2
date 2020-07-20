@@ -5,15 +5,19 @@ import BrandLogos from "../../Components/BrandLogos";
 import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
 import ProductList from "../../Components/Product/ProductList";
+import Modal from "../../Components/Modal/Modal";
+import Login from "../../Components/Login/Login";
 
 const AppContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
+  flex-shrink: 0;
 `;
 const Conatiner = styled.div`
   width: 550px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -26,7 +30,6 @@ const Brands = styled.div`
   justify-content: space-around;
   margin-bottom: 18.5px;
 `;
-
 const Categories = styled.div`
   display: flex;
   flex-direction: row;
@@ -35,13 +38,18 @@ const Categories = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
-const AllEtc = styled.div`
-  font-size: 22px;
-  text-align: center;
-  width: 65px;
+const ModalRoot = styled.div`
+  position: relative;
 `;
 
-const Admin = ({ brand, dataList, callApi }) => {
+const HomePresenter = ({
+  brand,
+  dataList,
+  callApi,
+  modalVisible,
+  openModal,
+  closeModal,
+}) => {
   return (
     <AppContainer>
       <Conatiner>
@@ -57,11 +65,23 @@ const Admin = ({ brand, dataList, callApi }) => {
           ))}
         </Categories>
         <Events />
-        admin
-        <ProductList dataList={dataList} brand={brand} />
+        <div id="root"></div>
+        <ModalRoot id="modal-root"></ModalRoot>
+        <button onClick={openModal}>Open Modal</button>
+        {modalVisible && (
+          <Modal
+            visible={modalVisible}
+            closable={true}
+            maskClosable={true}
+            onClose={closeModal}
+          >
+            <Login />
+          </Modal>
+        )}
+        <ProductList />
       </Conatiner>
     </AppContainer>
   );
 };
 
-export default Admin;
+export default HomePresenter;

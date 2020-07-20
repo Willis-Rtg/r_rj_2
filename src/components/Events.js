@@ -7,10 +7,11 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-const Text = styled.span`
+const Text = styled.div`
   padding-horizontal: 20px;
   font-size: 20px;
-  border: 1px solid black;
+  border: 1px solid gray;
+  padding: 2px 7px;
   border-radius: 14px;
 `;
 

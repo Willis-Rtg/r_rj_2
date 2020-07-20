@@ -18,7 +18,16 @@ export const CREATE_PRODUCT = gql`
       img: $img
       category: $category
       description: $description
-    )
+    ) {
+      id
+      name
+      brand
+      event
+      price
+      img
+      category
+      description
+    }
   }
 `;
 
