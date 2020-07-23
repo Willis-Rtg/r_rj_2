@@ -1,8 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import LoginBtn from "./Login/LoginBtn";
+import Login from "../assets/Login";
+import Modal from "../Components/Modal/Modal";
+import Portal from "../Components/Modal/Portal";
 
 const Conatiner = styled.div`
+  position: relative;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -23,14 +26,35 @@ const Title = styled.h3`
   font-size: 25px;
   font-weight: 800;
 `;
+const LoginWrapper = styled.div`
+  position: absolute;
+  top: 2px;
+  right: 33px;
+  display: flex;
+  align-items: center;
+`;
+const Button = styled.button`
+  border: 0;
+  background-color: inherit;
+`;
 
-const Header = () => {
+const Header = ({ modal, openModal, closeModal }) => {
   return (
     <Conatiner>
       <AppTitle>
         <Title>알뜰.편</Title>
-        <LoginBtn />
+        <LoginWrapper>
+          <Button onClick={openModal}>
+            <Login />
+          </Button>
+        </LoginWrapper>
       </AppTitle>
+      <div id="modal"></div>
+      {modal && (
+        <Portal>
+          <Modal closeModal={closeModal} />
+        </Portal>
+      )}
     </Conatiner>
   );
 };

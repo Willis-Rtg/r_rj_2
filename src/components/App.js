@@ -8,14 +8,14 @@ import { useQuery } from "@apollo/react-hooks";
 import { HashRouter as Router } from "react-router-dom";
 import Routes from "./Routes";
 
-const Wrapper = styled.div`
+const AppWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex: 1;
+  flex-direction: row;
   justify-content: stretch;
   align-items: stretch;
   margin: 0 auto;
   max-width: ${(props) => props.theme.maxWidth};
-  width: 100%;
 `;
 
 const Query = gql`
@@ -33,11 +33,11 @@ export default () => {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <Wrapper>
+      <AppWrapper>
         <Router>
           <Routes isLogIn={isLogIn} />
         </Router>
-      </Wrapper>
+      </AppWrapper>
     </ThemeProvider>
   );
 };

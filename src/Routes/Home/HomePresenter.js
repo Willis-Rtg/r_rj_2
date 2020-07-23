@@ -5,8 +5,6 @@ import BrandLogos from "../../Components/BrandLogos";
 import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
 import ProductList from "../../Components/Product/ProductList";
-import Modal from "../../Components/Modal/Modal";
-import Portal from "../../Components/Modal/Portal";
 
 const AppContainer = styled.div`
   width: 100%;
@@ -50,7 +48,7 @@ const HomePresenter = ({
   return (
     <AppContainer>
       <Conatiner>
-        <Header />
+        <Header modal={modal} openModal={openModal} closeModal={closeModal} />
         <Brands>
           {BrandLogos?.map((Brand, index) => (
             <Brand key={index} onClick={() => callApi(index)} />
@@ -62,13 +60,6 @@ const HomePresenter = ({
           ))}
         </Categories>
         <Events />
-        <div id="modal"></div>
-        <button onClick={openModal}>Modal</button>
-        {modal && (
-          <Portal>
-            <Modal closeModal={closeModal} />
-          </Portal>
-        )}
         <ProductList />
       </Conatiner>
     </AppContainer>

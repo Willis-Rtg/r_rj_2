@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-
-// const { width, height } = Dimension;
+import SocialBtns from "./SocialBtns";
 
 const ModalBg = styled.div`
   background: rgba(0, 0, 0, 0.25);
@@ -59,55 +58,48 @@ const Input = styled.input`
   width: 75%;
   margin: 3px 0;
 `;
-const SocialBtns = styled.div`
-  width: 75%;
-  display: flex;
-  justify-content: space-around;
+const Button = styled.button`
+  border: 0;
+  background-color: inherit;
+  font-size: 14px;
+`;
+const ForLogin = styled.p`
+  color: skyblue;
 `;
 
 const Modal = ({ closeModal }) => {
+  const [forLogin, setForLogin] = useState(true);
+  console.log("Modal -> forLogin", forLogin);
+
   return (
     <ModalBg>
       <ModalWrapper>
         <ModalHeader>
-          <ModalTitle>회원가입</ModalTitle>
+          <ModalTitle>{forLogin ? "로그인" : "회원가입"}</ModalTitle>
           <CloseBtn onClick={closeModal}>X</CloseBtn>
         </ModalHeader>
         <ModalContent>
-          <Form>
-            <Input placeholder="닉네임" />
-            <Input placeholder="이메일" />
-            <Input placeholder="비밀번호" />
-            <Input placeholder="비밀먼호 확인" />
-            <button type="submit">submit</button>
-          </Form>
-          Login
-          <SocialBtns>
-            <img
-              width="35"
-              height="35"
-              src={require("../../assets/social-logos/small-naver.png")}
-              alt="Naver login"
-            />
-            <img
-              width="35"
-              height="35"
-              src={require("../../assets/social-logos/small-google.png")}
-              alt="Google login"
-            />
-            <img
-              width="35"
-              height="35"
-              src={require("../../assets/social-logos/small-facebook.png")}
-              alt="Facebook login"
-            />
-            <img
-              width="35"
-              height="35"
-              src={require("../../assets/social-logos/small-kakao.png")}
-              alt="Kakao login"
-            />
-          </SocialBtns>
+          {forLogin ? (
+            <Form>
+              <Input placeholder="닉네임" />
+              <Input placeholder="이메일" />
+              <Button type="submit">Log In</Button>
+            </Form>
+          ) : (
+            <Form>
+              <Input placeholder="닉네임" />
+              <Input placeholder="이메일" />
+              <Input placeholder="비밀번호" />
+              <Input placeholder="비밀먼호 확인" />
+              <Button type="submit">Join</Button>
+            </Form>
+          )}
+          {
+            <Button onClick={() => setForLogin(forLogin ? false : true)}>
+              <ForLogin>{forLogin ? "Log in" : "Join"}</ForLogin>
+            </Button>
+          }
+          <SocialBtns />
         </ModalContent>
       </ModalWrapper>
     </ModalBg>

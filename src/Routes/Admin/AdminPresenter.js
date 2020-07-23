@@ -14,6 +14,7 @@ const AppContainer = styled.div`
 `;
 const Conatiner = styled.div`
   width: 550px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,11 +35,6 @@ const Categories = styled.div`
   align-items: center;
   padding: 0 10px;
   /* background-color: lightblue; */
-`;
-const AllEtc = styled.div`
-  font-size: 22px;
-  text-align: center;
-  width: 65px;
 `;
 
 const Admin = ({ brand, dataList, callApi }) => {

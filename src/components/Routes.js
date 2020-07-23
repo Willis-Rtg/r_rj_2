@@ -5,18 +5,31 @@ import Home from "../Routes/Home";
 import Admin from "../Routes/Admin";
 
 const LogIn = () => (
-  <Switch>
-    <Route path="/" exact component={Home} />
-    <Redirect path="*" to="/" />
-  </Switch>
+  <>
+    <Switch>
+      <Route path="/" exact component={Home} />
+      <Redirect path="*" to="/" />
+    </Switch>
+  </>
 );
 const LogOut = () => (
+  <>
+    Ad
+    <Switch>
+      <Route path="/" component={Home} />
+      <Redirect path="*" to="/" />
+    </Switch>
+    Ad
+  </>
+);
+const IsAdmin = () => (
   <Switch>
     <Route path="/" component={Home} />
     <Route path="/admin" component={Admin} />
     <Redirect path="*" to="/" />
   </Switch>
 );
+
 const Routes = ({ isLogIn }) => (isLogIn ? <LogIn /> : <LogOut />);
 
 Routes.propTypes = {
