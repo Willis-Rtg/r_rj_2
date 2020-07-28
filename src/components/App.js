@@ -5,16 +5,16 @@ import GlobalStyles from "../Styles/GlobalStyles";
 import Theme from "../Styles/Theme";
 import { gql } from "apollo-boost";
 import { useQuery } from "@apollo/react-hooks";
-import { HashRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 import Routes from "./Routes";
 
 const AppWrapper = styled.div`
   display: flex;
-  flex: 1;
   flex-direction: row;
-  justify-content: stretch;
+  justify-content: cetner;
   align-items: stretch;
-  margin: 0 auto;
+  flex: 1;
   max-width: ${(props) => props.theme.maxWidth};
 `;
 

@@ -6,19 +6,14 @@ import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
 import ProductList from "../../Components/Product/ProductList";
 
-const AppContainer = styled.div`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  flex-shrink: 0;
-`;
 const Conatiner = styled.div`
-  width: 550px;
   position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  flex: 1;
+  min-width: 550px;
 `;
 const Brands = styled.div`
   width: 100%;
@@ -27,6 +22,10 @@ const Brands = styled.div`
   align-items: center;
   justify-content: space-around;
   margin-bottom: 18.5px;
+`;
+const BrandLogo = styled.div`
+  border-radius: 10px;
+  z-index: 20;
 `;
 const Categories = styled.div`
   display: flex;
@@ -46,23 +45,23 @@ const HomePresenter = ({
   closeModal,
 }) => {
   return (
-    <AppContainer>
-      <Conatiner>
-        <Header modal={modal} openModal={openModal} closeModal={closeModal} />
-        <Brands>
-          {BrandLogos?.map((Brand, index) => (
-            <Brand key={index} onClick={() => callApi(index)} />
-          ))}
-        </Brands>
-        <Categories>
-          {CategoryIcons?.map((Type, index) => (
-            <Type key={index}></Type>
-          ))}
-        </Categories>
-        <Events />
-        <ProductList />
-      </Conatiner>
-    </AppContainer>
+    <Conatiner>
+      <Header modal={modal} openModal={openModal} closeModal={closeModal} />
+      <Brands>
+        {BrandLogos?.map((Brand, index) => (
+          <BrandLogo key={index}>
+            <Brand onClick={() => callApi(index)} />
+          </BrandLogo>
+        ))}
+      </Brands>
+      <Categories>
+        {CategoryIcons?.map((Type, index) => (
+          <Type key={index}></Type>
+        ))}
+      </Categories>
+      <Events />
+      <ProductList />
+    </Conatiner>
   );
 };
 

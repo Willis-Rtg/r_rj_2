@@ -6,14 +6,14 @@ const defaults = {
 
 const resolvers = {
   Mutation: {
-    logUserIn: (_, { token }, { cache }) => {
+    localLogin: (_, { token }, { cache }) => {
       localStorage.setItem("token", token);
       cache.writeData({
         data: { isLogIn: true },
       });
       return null;
     },
-    logUserOut: (_, __, { cache }) => {
+    localLogout: (_, __, { cache }) => {
       localStorage.removeItem("token");
       window.location.reload();
       return null;

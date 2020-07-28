@@ -34,8 +34,12 @@ const LoginWrapper = styled.div`
   align-items: center;
 `;
 const Button = styled.button`
-  border: 0;
   background-color: inherit;
+  border: 0;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Header = ({ modal, openModal, closeModal }) => {

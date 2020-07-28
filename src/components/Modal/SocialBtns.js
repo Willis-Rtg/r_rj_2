@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 `;
 const Btn = styled.button`
   border: 0;
+  background: transparent;
 `;
 const Image = styled.img`
   width: 36px;
@@ -20,9 +21,8 @@ export default () => {
     <Wrapper>
       {social_names.map((name, index) => {
         return (
-          <Btn keh={index}>
+          <Btn key={index}>
             <Image
-              keh={index}
               src={require(`../../assets/social-logos/${name}.png`)}
               alt={name}
             />

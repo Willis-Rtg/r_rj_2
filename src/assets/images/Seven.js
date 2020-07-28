@@ -10,6 +10,7 @@ function Seven(props) {
       viewBox="0 0 272.687 257.444"
       id="prefix__svg2"
       fillRule="evenodd"
+      fillOpacity="1"
       {...props}
     >
       <defs id="prefix__defs4"></defs>

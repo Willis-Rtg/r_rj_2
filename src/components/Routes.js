@@ -1,32 +1,39 @@
 import React from "react";
+import styled from "styled-components";
 import { Route, Switch, Redirect } from "react-router-dom";
 import PropTypes from "prop-types";
 import Home from "../Routes/Home";
 import Admin from "../Routes/Admin";
 
+const Ad = styled.div`
+  flex: 1;
+`;
+
 const LogIn = () => (
   <>
+    <Ad />
     <Switch>
       <Route path="/" exact component={Home} />
-      <Redirect path="*" to="/" />
+      <Redirect from="*" to="/" />
     </Switch>
+    <Ad />
   </>
 );
 const LogOut = () => (
   <>
-    Ad
+    <Ad />
     <Switch>
-      <Route path="/" component={Home} />
-      <Redirect path="*" to="/" />
+      <Route path="/" exact component={Home} />
+      <Redirect from="*" to="/" />
     </Switch>
-    Ad
+    <Ad />
   </>
 );
 const IsAdmin = () => (
   <Switch>
     <Route path="/" component={Home} />
     <Route path="/admin" component={Admin} />
-    <Redirect path="*" to="/" />
+    <Redirect from="*" to="/" />
   </Switch>
 );
 
