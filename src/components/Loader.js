@@ -1,9 +1,23 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
+const Animation = keyframes`
+  0%{
+    opacity:0;
+  }
+  50%{
+    opacity:1;
+  }
+  100%{
+    opacity:0;
+  }
 `;
 
-export default () => <Container>Loading...</Container>;
+const Loader = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${Animation} 1s ease-in-out infinite;
+`;
+
+export default () => <Loader>알뜰.편</Loader>;

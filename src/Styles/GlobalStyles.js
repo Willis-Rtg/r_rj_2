@@ -18,6 +18,9 @@ const GlobalStyles = createGlobalStyle`
     width:100%;
     height:100%;
   }
+  #root{
+    height:100%;
+  }
 `;
 
 export default GlobalStyles;

@@ -65,11 +65,10 @@ const ForLogin = styled.p`
 const Modal = ({ closeModal }) => {
   const email = useInput("");
   const name = useInput("");
-  const password = useInput("");
-  const password_confirm = useInput("");
+  const secret = useInput("");
   const [action, setAction] = useState(true);
-  const loginProps = { email, password };
-  const joinProps = { email, name, password, password_confirm };
+  const loginProps = { email, secret };
+  const joinProps = { email, name, setAction };
   return (
     <ModalBg>
       <ModalWrapper>

@@ -18,22 +18,22 @@ const Button = styled.button`
   font-size: 14px;
 `;
 
-export default ({ email, name, password, password_confirm }) => {
+export default ({ email, name, setAction }) => {
   const [createUser] = useMutation(CREATE_USER, {
     variables: {
       email: email.value,
       name: name.value,
-      password: password.value,
-      password_confirm: password_confirm.value,
     },
   });
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (email && name && password && password_confirm)
+    if (email && name)
       try {
         const {
           data: { createUser: newUser },
         } = await createUser();
+        console.log("onSubmit -> newUser", newUser);
+        setAction(true);
       } catch (e) {
         console.log(e);
       }
@@ -42,18 +42,6 @@ export default ({ email, name, password, password_confirm }) => {
     <LoginForm onSubmit={onSubmit}>
       <Input name="name" type="text" placeholder="닉네임" {...name} />
       <Input name="email" type="email" placeholder="이메일" {...email} />
-      <Input
-        name="password"
-        type="password"
-        placeholder="비밀번호"
-        {...password}
-      />
-      <Input
-        name="password_confirm"
-        type="password"
-        placeholder="비밀먼호 확인"
-        {...password_confirm}
-      />
       <Button type="submit">Join</Button>
     </LoginForm>
   );

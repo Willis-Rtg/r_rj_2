@@ -6,3 +6,13 @@ export const products = gql`
     name
   }
 `;
+
+export const ME = gql`
+  query me {
+    me {
+      name
+      email
+      role
+    }
+  }
+`;
