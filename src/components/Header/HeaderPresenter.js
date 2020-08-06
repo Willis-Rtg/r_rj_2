@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Login from "../assets/Login";
-import Modal from "../Components/Modal/Modal";
-import Portal from "../Components/Modal/Portal";
+import Modal from "..//Modal/Modal";
+import Portal from "..//Modal/Portal";
+import Login from "../../assets/Login";
+import Logout from "../../assets/Logout";
 
 const Conatiner = styled.div`
   position: relative;
@@ -44,28 +45,33 @@ const Button = styled.button`
   z-index: 10;
 `;
 const ModeButton = styled.div`
+  position: absolute;
   margin-left: 20px;
+  left: 10;
+  z-index: 5;
 `;
 
-const Header = ({ modal, openModal, closeModal, loginData }) => {
-  const changeMode = (e) => {
-    e.preventDefault();
-    let buttonText = e.target.innerHTML;
-    if (buttonText === "User") e.target.innerHTML = "Admin";
-    if (buttonText === "Admin") e.target.innerHTML = "User";
-  };
+export default ({
+  modal,
+  openModal,
+  closeModal,
+  loginData,
+  mode,
+  changeMode,
+  logoutHandler,
+}) => {
   return (
     <Conatiner>
-      {loginData && (
+      {(loginData?.me.role === "ADMIN" || loginData?.me.role === "MANAGER") && (
         <ModeButton>
-          <Button onClick={changeMode}>User</Button>
+          <Button onClick={changeMode}>{mode}</Button>
         </ModeButton>
       )}
       <AppTitle>
         <Title> 알뜰.편 </Title>
         <LoginWrapper>
-          <Button onClick={openModal}>
-            <Login />
+          <Button onClick={loginData ? logoutHandler : openModal}>
+            {loginData ? <Logout /> : <Login />}
           </Button>
         </LoginWrapper>
       </AppTitle>
@@ -78,5 +84,3 @@ const Header = ({ modal, openModal, closeModal, loginData }) => {
     </Conatiner>
   );
 };
-
-export default Header;

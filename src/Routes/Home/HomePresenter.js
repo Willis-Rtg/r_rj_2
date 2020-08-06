@@ -4,7 +4,7 @@ import Header from "../../Components/Header";
 import BrandLogos from "../../Components/BrandLogos";
 import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
-import ProductList from "../../Components/Product/ProductList";
+import ProductList from "../../Components/ProductList";
 import Loader from "../../Components/Loader";
 
 const Conatiner = styled.div`
@@ -25,7 +25,10 @@ const Brands = styled.div`
 `;
 const BrandLogo = styled.div`
   border-radius: 10px;
-  z-index: 20;
+  z-index: 30;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 const Categories = styled.div`
   display: flex;
@@ -36,14 +39,15 @@ const Categories = styled.div`
 `;
 
 const HomePresenter = ({
-  brand,
-  dataList,
   callApi,
+  dataList,
   modal,
   openModal,
   closeModal,
   loginData,
   loginLoading,
+  mode,
+  setMode,
 }) => {
   return (
     <Conatiner>
@@ -56,11 +60,13 @@ const HomePresenter = ({
             openModal={openModal}
             closeModal={closeModal}
             loginData={loginData}
+            mode={mode}
+            setMode={setMode}
           />
           <Brands>
             {BrandLogos?.map((Brand, index) => (
-              <BrandLogo key={index}>
-                <Brand onClick={() => callApi(index)} />
+              <BrandLogo key={index} onClick={(e) => callApi(index, e)}>
+                <Brand />
               </BrandLogo>
             ))}
           </Brands>
@@ -70,7 +76,7 @@ const HomePresenter = ({
             ))}
           </Categories>
           <Events />
-          <ProductList />
+          <ProductList brand={dataList.brand} dataList={dataList} mode={mode} />
         </>
       )}
     </Conatiner>

@@ -10,7 +10,7 @@ import Routes from "./Routes";
 const AppWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: cetner;
+  justify-content: flex-start;
   align-items: stretch;
   flex: 1;
 `;

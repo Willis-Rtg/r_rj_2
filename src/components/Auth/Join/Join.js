@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import useInput from "../../../Hooks/useInput";
 import Input from "../../Input";
 import { CREATE_USER } from "./JoinQueries";
 import { useMutation } from "@apollo/react-hooks";

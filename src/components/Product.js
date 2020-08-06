@@ -25,6 +25,7 @@ const Event = styled.p`
 const Price = styled.p``;
 
 export default ({ name, img, event, price }) => {
+  // console.log("name, img, event, price", name, img, event, price);
   return (
     <Container className="product">
       <Name className="name">{name}</Name>

@@ -17,7 +17,7 @@ const Loader = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: ${Animation} 1s ease-in-out infinite;
+  animation: ${Animation} 2s ease-in-out infinite;
 `;
 
 export default () => <Loader>알뜰.편</Loader>;

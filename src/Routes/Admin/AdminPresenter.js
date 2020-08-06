@@ -4,7 +4,7 @@ import Header from "../../Components/Header";
 import BrandLogos from "../../Components/BrandLogos";
 import CategoryIcons from "../../Components/CategoryIcons";
 import Events from "../../Components/Events";
-import ProductList from "../../Components/Product/ProductList";
+import ProductList from "../../Components/ProductList";
 
 const AppContainer = styled.div`
   width: 100%;
