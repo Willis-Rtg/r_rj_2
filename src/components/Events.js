@@ -10,7 +10,7 @@ const Container = styled.div`
 const Text = styled.div`
   padding-horizontal: 20px;
   font-size: 20px;
-  border: 1px solid gray;
+  /* border: 1px solid gray; */
   padding: 2px 7px;
   border-radius: 14px;
 `;

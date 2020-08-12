@@ -14,3 +14,7 @@
 - Modal : have a func of login
 - Home(Admin) : have a call-Api to get product list
   :
+
+### Date & Need
+
+- 08/07 : callApi action stop => all button two click stop

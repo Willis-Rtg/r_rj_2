@@ -6,6 +6,7 @@ import Theme from "../Styles/Theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import Routes from "./Routes";
+import "../Styles/App.css";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -13,6 +14,7 @@ const AppWrapper = styled.div`
   justify-content: flex-start;
   align-items: stretch;
   flex: 1;
+  height: 100%;
 `;
 
 export default () => {

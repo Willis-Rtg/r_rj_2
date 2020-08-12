@@ -1,13 +1,5 @@
 import { gql } from "apollo-boost";
 
-export const DELETE_PRODUCTS = gql`
-  mutation deleteProducts($brand: String) {
-    deleteProducts(brand: $brand) {
-      count
-    }
-  }
-`;
-
 export const PRODUCT = gql`
   {
     Product {
@@ -23,10 +15,15 @@ export const PRODUCT = gql`
   }
 `;
 
-export const products = gql`
-  query products($brand: String, $category: String, $event: String) {
-    id
-    name
+export const PRODUCTS = gql`
+  query products($brand: [String], $category: String, $event: String) {
+    products(brand: $brand, category: $category, event: $event) {
+      id
+      name
+      brand
+      event
+      price
+    }
   }
 `;
 

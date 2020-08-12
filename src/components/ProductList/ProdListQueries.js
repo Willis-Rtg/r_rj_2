@@ -31,6 +31,19 @@ export const CREATE_PRODUCT = gql`
   }
 `;
 
+export const PRODUCTS = gql`
+  query products($brand: [String], $category: String, $event: String) {
+    products(brand: $brand, category: $category, event: $event) {
+      id
+      name
+      img
+      brand
+      event
+      price
+    }
+  }
+`;
+
 export const DELETE_PRODUCTS = gql`
   mutation deleteProducts($brand: String) {
     deleteProducts(brand: $brand) {

@@ -8,7 +8,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   text-align: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 const Name = styled.p`
   font-size: 12.5px;
@@ -25,7 +25,7 @@ const Event = styled.p`
 const Price = styled.p``;
 
 export default ({ name, img, event, price }) => {
-  // console.log("name, img, event, price", name, img, event, price);
+  console.log("name, img, event, price", name, img, event, price);
   return (
     <Container className="product">
       <Name className="name">{name}</Name>

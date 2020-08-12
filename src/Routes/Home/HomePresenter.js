@@ -21,13 +21,16 @@ const Brands = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-around;
-  margin-bottom: 18.5px;
+  margin-bottom: 10px;
 `;
 const BrandLogo = styled.div`
   border-radius: 10px;
   z-index: 30;
   &:hover {
     opacity: 0.5;
+  }
+  & > svg {
+    pointer-events: none;
   }
 `;
 const Categories = styled.div`
@@ -39,8 +42,6 @@ const Categories = styled.div`
 `;
 
 const HomePresenter = ({
-  callApi,
-  dataList,
   modal,
   openModal,
   closeModal,
@@ -48,6 +49,11 @@ const HomePresenter = ({
   loginLoading,
   mode,
   setMode,
+  toggleBrand,
+  selectedBrands,
+  products,
+  setProducts,
+  getProducts,
 }) => {
   return (
     <Conatiner>
@@ -64,11 +70,17 @@ const HomePresenter = ({
             setMode={setMode}
           />
           <Brands>
-            {BrandLogos?.map((Brand, index) => (
-              <BrandLogo key={index} onClick={(e) => callApi(index, e)}>
-                <Brand />
-              </BrandLogo>
-            ))}
+            {BrandLogos?.map((Brand, index) => {
+              let brandname = Brand.name.toLowerCase();
+              return (
+                <BrandLogo
+                  key={index}
+                  onClick={(e) => toggleBrand(e, brandname)}
+                >
+                  <Brand />
+                </BrandLogo>
+              );
+            })}
           </Brands>
           <Categories>
             {CategoryIcons?.map((Type, index) => (
@@ -76,7 +88,7 @@ const HomePresenter = ({
             ))}
           </Categories>
           <Events />
-          <ProductList brand={dataList.brand} dataList={dataList} mode={mode} />
+          <ProductList selectedBrands={selectedBrands} mode={mode} />
         </>
       )}
     </Conatiner>
