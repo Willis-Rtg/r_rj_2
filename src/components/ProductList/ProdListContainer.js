@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProdListPresenter from "./ProdListPresenter";
 import { useMutation, useQuery } from "@apollo/react-hooks";
 import { CREATE_PRODUCT } from "./ProdListQueries";
@@ -67,43 +67,24 @@ export default ({ selectedBrands = [], mode }) => {
   };
 
   const [apiData, setApiData] = useState({
-    list: [],
+    data: [],
     loading: false,
-    brand: "",
   });
 
   const callApi = async (brand) => {
     // e.preventDefault();
     // e.target.setAttribute("disabled");
     setApiData({ loading: true });
-    if (brand.includes("cu"))
-      setApiData({
-        list: await getConvenience.cu(),
-        brand: "cu",
-        loading: false,
-      });
-    if (brand.includes("gs")) {
-      setApiData({
-        list: await getConvenience.gs(),
-        brand: "gs",
-        loading: false,
-      });
-      console.log("click gs");
-    }
-    if (brand === 2)
-      setApiData({
-        list: await getConvenience.seven(),
-        brand: "seven",
-        loading: false,
-      });
-    if (brand === 3)
-      setApiData({
-        list: await getConvenience.emart(),
-        brand: "emart",
-        loading: false,
-      });
+    setApiData({ data: await getConvenience(brand), loading: false });
+    console.log("api data :", apiData);
   };
 
+  const test = async () => {
+    const data = await getConvenience("gs");
+    console.log("test -> data", data);
+  };
+  test();
+  // useEffect(() => callApi(selectedBrands[0]), [selectedBrands]);
   // useEffect(() => {
   //   callApi(selectedBrands);
   // }, [selectedBrands]);

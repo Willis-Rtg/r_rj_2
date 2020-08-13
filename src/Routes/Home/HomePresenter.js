@@ -51,9 +51,6 @@ const HomePresenter = ({
   setMode,
   toggleBrand,
   selectedBrands,
-  products,
-  setProducts,
-  getProducts,
 }) => {
   return (
     <Conatiner>
