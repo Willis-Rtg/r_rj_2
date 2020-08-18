@@ -9,11 +9,11 @@
 - Header : have each grant by role
   : have to call Modal
   : have a func of logout
-  - have a modal
+  : have a modal
 - Modal : have the funcs of Auth
 - Modal : have a func of login
-- Home(Admin) : have a call-Api to get product list
-  :
+- Home : have a call-Api to get product list
+- prodList : createProduct, deleteProduct, updateProduct
 
 ### Date & Need
 

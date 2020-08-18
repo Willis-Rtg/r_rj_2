@@ -17,5 +17,6 @@ export default async (api, domparser, doc, mergeList, prodList) => {
     }
   };
   await axiosGet(pageIndex);
+  console.log("mergeList", mergeList);
   return mergeList;
 };

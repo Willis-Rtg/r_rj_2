@@ -48,6 +48,8 @@ const HomePresenter = ({
   loginData,
   loginLoading,
   mode,
+  callApi,
+  apiData,
   setMode,
   toggleBrand,
   selectedBrands,
@@ -72,7 +74,11 @@ const HomePresenter = ({
               return (
                 <BrandLogo
                   key={index}
-                  onClick={(e) => toggleBrand(e, brandname)}
+                  onClick={(e) =>
+                    mode === "USER"
+                      ? toggleBrand(e, brandname)
+                      : callApi(brandname)
+                  }
                 >
                   <Brand />
                 </BrandLogo>
@@ -85,7 +91,11 @@ const HomePresenter = ({
             ))}
           </Categories>
           <Events />
-          <ProductList selectedBrands={selectedBrands} mode={mode} />
+          <ProductList
+            selectedBrands={selectedBrands}
+            mode={mode}
+            apiData={apiData}
+          />
         </>
       )}
     </Conatiner>

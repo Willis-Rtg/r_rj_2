@@ -6,16 +6,12 @@ import { DELETE_PRODUCTS } from "./ProdListQueries";
 import { PRODUCTS } from "./ProdListQueries";
 
 export default ({ selectedBrands, mode, apiData }) => {
-  useEffect(() => console.log("selectedBrands", selectedBrands), [
+  useEffect(() => console.log("Admin selectedBrands", selectedBrands), [
     selectedBrands,
   ]);
 
   const [edit, setEdit] = useState("edit");
   const [createProduct] = useMutation(CREATE_PRODUCT);
-  const { data: products, loading: productsLoading } = useQuery(PRODUCTS, {
-    variables: { brand: selectedBrands },
-  });
-  console.log("products", products);
   const [deleteProducts] = useMutation(DELETE_PRODUCTS);
 
   let productsInfo;
@@ -41,7 +37,7 @@ export default ({ selectedBrands, mode, apiData }) => {
         const newProduct = await createProduct({
           variables: {
             name,
-            brand: apiData.brand,
+            brand: selectedBrands[0],
             event,
             price,
             img,
@@ -66,6 +62,11 @@ export default ({ selectedBrands, mode, apiData }) => {
     console.log("deleteHandler -> test", test);
   };
 
+  // useEffect(() => callApi(selectedBrands[0]), [selectedBrands]);
+  // useEffect(() => {
+  //   callApi(selectedBrands);
+  // }, [selectedBrands]);
+
   const prodListProps = {
     selectedBrands,
     catchData,
@@ -73,8 +74,6 @@ export default ({ selectedBrands, mode, apiData }) => {
     deleteHandler,
     mode,
     apiData,
-    products,
-    productsLoading,
     edit,
     setEdit,
     editMode,

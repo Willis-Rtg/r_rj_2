@@ -20,6 +20,7 @@ export const PRODUCTS = gql`
     products(brand: $brand, category: $category, event: $event) {
       id
       name
+      img
       brand
       event
       price

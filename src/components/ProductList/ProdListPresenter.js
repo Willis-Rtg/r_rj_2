@@ -21,77 +21,102 @@ const ShowHide = styled.div`
 `;
 const AdminBtns = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
-const Button = styled.button``;
+const Button = styled.div`
+  cursor: pointer;
+  padding: 5px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+`;
 
 export default ({
-  dataList,
-  brand,
-  mode,
   catchData,
   insertData,
   deleteHandler,
+  mode,
   apiData,
-  loading,
-  // prodProps,
-  // setProdProps,
+  products,
+  productsLoading,
   edit,
   setEdit,
   editMode,
 }) => {
+  console.log("products", products);
+  console.log("productsLoading", productsLoading);
   let prodProps;
   const setProdProps = (name, img, event, price) => {
     prodProps = { name, img, event, price };
-    console.log("setProdProps -> prodProps", prodProps);
   };
   return (
     <Container>
       <ShowHide>
         {mode !== "USER" && (
           <AdminBtns>
-            <Button onClick={() => catchData()}>catch Data</Button>
-            <Button onClick={() => insertData()}>insert</Button>
-            <Button onClick={() => deleteHandler()}>All Delete</Button>
-            <Button onClick={() => deleteHandler("cu")}>Cu Delete</Button>
-            <Button onClick={() => deleteHandler("gs")}>Gs Delete</Button>
-            <Button onClick={() => deleteHandler("seven")}>Seven Delete</Button>
-            <Button onClick={() => deleteHandler("emart")}>Emart Delete</Button>
+            <div style={{ display: "flex" }}>
+              <Button onClick={() => insertData()}>insert</Button>
+            </div>
+            <div
+              style={{
+                width: "100%",
+                display: "flex",
+                justifyContent: "space-around",
+                marginBottom: "5px",
+              }}
+            >
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p>Products : </p>
+                <Button onClick={() => console.log("cu")}>cu</Button>
+                <Button onClick={() => console.log("gs")}>gs</Button>
+                <Button onClick={() => console.log("seven")}>seven</Button>
+                <Button onClick={() => console.log("emart")}>emart</Button>
+              </div>
+            </div>
             <Button onClick={editMode}>{edit}</Button>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <p>Delete : </p>
+              <Button onClick={() => deleteHandler()}>All</Button>
+              <Button onClick={() => deleteHandler("cu")}>Cu</Button>
+              <Button onClick={() => deleteHandler("gs")}>Gs</Button>
+              <Button onClick={() => deleteHandler("seven")}>Seven</Button>
+              <Button onClick={() => deleteHandler("emart")}>emart</Button>
+            </div>
           </AdminBtns>
         )}
-        {dataList?.loading || (loading && <Loader />)}
+        {apiData?.loading && <Loader />}
       </ShowHide>
+      {productsLoading === true && <Loader />}
       {mode === "USER" &&
-        apiData?.list?.map((product, index) => {
+        products?.products?.map((product, index) => {
           console.log("product", product);
-
           return <Product key={index} {...product} />;
         })}
-      {mode !== "USER" &&
-        apiData?.list?.map((item, index) => {
-          brand === "gs" &&
+      {mode === "ADMIN" &&
+        apiData?.data?.map((item, index) => {
+          apiData.brand === "gs" &&
             setProdProps(
               item.goodsNm,
               item.attFileNm,
               item.eventTypeNm,
               item.price
             );
-          brand === "cu" &&
+          apiData.brand === "cu" &&
             setProdProps(
               item.querySelector(".prodName a")?.textContent,
               item.querySelector("img")?.getAttribute("src"),
               item.querySelector("ul li")?.textContent,
               item.querySelector(".prodPrice")?.textContent
             );
-          brand === "seven" &&
+          apiData.brand === "seven" &&
             setProdProps(
               item.querySelector(".name")?.textContent,
               "https://7-eleven.co.kr" +
                 item.querySelector("img")?.getAttribute("src"),
-              item.querySelector(".ico_tag_07")?.textContent,
+              item.querySelector(".tag_list_01")?.textContent,
               item.querySelector(".price")?.textContent
             );
-          brand === "emart" &&
+          apiData.brand === "emart" &&
             setProdProps(
               item.querySelector(".productDiv")?.textContent,
               "https://www.emart24.co.kr/" +
