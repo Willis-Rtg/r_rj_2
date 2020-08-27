@@ -15,9 +15,18 @@ export default ({ selectedBrands, mode, apiData }) => {
   const { data: products, loading: productsLoading } = useQuery(PRODUCTS, {
     variables: { brand: selectedBrands },
   });
-  console.log("products", products);
-  const [deleteProducts] = useMutation(DELETE_PRODUCTS);
+  const [sortedProd, setSortedProd] = useState({});
 
+  useEffect(() => {
+    setSortedProd({
+      cu: products?.products?.filter((product) => product.brand === "cu"),
+      gs: products?.products?.filter((product) => product.brand === "gs"),
+      seven: products?.products?.filter((product) => product.brand === "seven"),
+      emart: products?.products?.filter((product) => product.brand === "emart"),
+    });
+  }, [products]);
+
+  const [deleteProducts] = useMutation(DELETE_PRODUCTS);
   let productsInfo;
   let name, event, price, img;
 
@@ -25,7 +34,6 @@ export default ({ selectedBrands, mode, apiData }) => {
     productsInfo = document.getElementsByClassName("product");
     for (let item of productsInfo) {
       img = item.querySelector(".img").getAttribute("src");
-      console.log("catchData -> img", img);
     }
   };
 
@@ -74,6 +82,7 @@ export default ({ selectedBrands, mode, apiData }) => {
     mode,
     apiData,
     products,
+    sortedProd,
     productsLoading,
     edit,
     setEdit,

@@ -1,9 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import NanumGothic from "../assets/fonts/NanumGothic-Regular.ttf";
 import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
   ${reset};
   * {
+  
     box-sizing:border-box;
     &:focus {
       outline: 0;
@@ -17,6 +19,8 @@ const GlobalStyles = createGlobalStyle`
   body{
     width:100%;
     height:100%;
+    @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+    font-family: 'Nanum Gothic', sans-serif;
   }
   #root{
     height:100%;
