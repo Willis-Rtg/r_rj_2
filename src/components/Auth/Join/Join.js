@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Input from "../../Input";
 import { CREATE_USER } from "./JoinQueries";
 import { useMutation } from "@apollo/react-hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = styled.form`
   width: 100%;
@@ -11,13 +13,21 @@ const LoginForm = styled.form`
   align-items: center;
   margin-bottom: 12.5px;
 `;
-const Button = styled.button`
+const SendBtn = styled.button`
   border: 0;
-  background-color: inherit;
-  font-size: 14px;
+  border-radius: 15px;
+  margin-top: 3px;
+  font-size: 1rem;
+  background-color: white;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
-export default ({ email, name, setAction }) => {
+export default ({ email, name, password, password_confirm, setAction }) => {
   const [createUser] = useMutation(CREATE_USER, {
     variables: {
       email: email.value,
@@ -41,7 +51,21 @@ export default ({ email, name, setAction }) => {
     <LoginForm onSubmit={onSubmit}>
       <Input name="name" type="text" placeholder="닉네임" {...name} />
       <Input name="email" type="email" placeholder="이메일" {...email} />
-      <Button type="submit">Join</Button>
+      <Input
+        name="password"
+        type="password"
+        placeholder="비밀번호"
+        {...password}
+      />
+      <Input
+        name="password_confirm"
+        type="password"
+        placeholder="비밀번호 확인"
+        {...password_confirm}
+      />
+      <SendBtn type="submit">
+        <FontAwesomeIcon icon={faPaperPlane} color="#33a2c4" />
+      </SendBtn>
     </LoginForm>
   );
 };

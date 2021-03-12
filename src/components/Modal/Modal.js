@@ -44,6 +44,13 @@ const CloseBtn = styled.button`
   border: 0;
   font-size: 17px;
   border-radius: 20px;
+  background-color: white;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 const ModalContent = styled.div`
   width: 100%;
@@ -59,16 +66,24 @@ const Button = styled.button`
   margin-bottom: 5px;
 `;
 const ForLogin = styled.p`
-  color: skyblue;
+  color: #33a2c4;
+  font-size: 0.75rem;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
 const Modal = ({ closeModal }) => {
   const email = useInput("");
   const name = useInput("");
-  const secret = useInput("");
+  const password = useInput("");
+  const password_confirm = useInput("");
   const [action, setAction] = useState(true);
-  const loginProps = { email, secret };
-  const joinProps = { email, name, setAction };
+  const loginProps = { email, password };
+  const joinProps = { email, name, password, password_confirm, setAction };
   return (
     <ModalBg>
       <ModalWrapper>

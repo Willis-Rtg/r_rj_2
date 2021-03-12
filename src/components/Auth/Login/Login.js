@@ -4,6 +4,8 @@ import Input from "../../Input";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
 import { LOGIN_USER, LOCAL_LOG_IN, SEND_MAIL } from "./LoginQueries";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
 const LoginForm = styled.form`
   width: 100%;
@@ -12,21 +14,26 @@ const LoginForm = styled.form`
   align-items: center;
   margin-bottom: 9px;
 `;
-const Button = styled.button`
+const SendBtn = styled.button`
   border: 0;
   border-radius: 15px;
   margin-top: 3px;
-  padding: 5px 7px;
-  font-size: 12px;
+  font-size: 1rem;
+  background-color: white;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 
-export default ({ email, secret }) => {
-  const [loginPage, setloginPage] = useState("email");
+export default ({ email, password }) => {
   const [sendMail] = useMutation(SEND_MAIL, {
     variables: { email: email.value },
   });
   const [loginUser] = useMutation(LOGIN_USER, {
-    variables: { email: email.value, secret: secret.value },
+    variables: { email: email.value, secret: password.value },
   });
   const [localLogin] = useMutation(LOCAL_LOG_IN);
   const onSubmit_email = async (e) => {
@@ -37,7 +44,6 @@ export default ({ email, secret }) => {
           data: { sendMail: sendSecret },
         } = await sendMail();
         if (!sendSecret) throw Error("have the error for sending secret");
-        setloginPage("secret");
       } catch (e) {
         console.log(e);
         toast.error("have a error");
@@ -47,7 +53,7 @@ export default ({ email, secret }) => {
 
   async function onSubmit_secret(e) {
     e.preventDefault();
-    if (email.value && secret.value)
+    if (email.value && password.value)
       try {
         const {
           data: { loginUser: token },
@@ -61,15 +67,18 @@ export default ({ email, secret }) => {
       }
   }
 
-  return loginPage === "email" ? (
+  return (
     <LoginForm onSubmit={onSubmit_email}>
       <Input name="email" type="email" placeholder="이메일" {...email} />
-      <Button type="submit">이메일 보내기</Button>
+      <Input
+        name="password"
+        type="password"
+        placeholder="이메일"
+        {...password}
+      />
+      <SendBtn type="submit">
+        <FontAwesomeIcon icon={faPaperPlane} color="#33a2c4" />
+      </SendBtn>
     </LoginForm>
-  ) : loginPage === "secret" ? (
-    <LoginForm onSubmit={onSubmit_secret}>
-      <Input name="secret" placeholder="확인 코드" {...secret} />
-      <Button type="submit">Log In</Button>
-    </LoginForm>
-  ) : null;
+  );
 };

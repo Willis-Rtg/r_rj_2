@@ -23,10 +23,11 @@ const AppTitle = styled.div`
   margin: 20px;
   position: relative;
   width: 100%;
+  font-family: "Gugi", cursive;
 `;
 const Title = styled.h3`
-  font-size: 25px;
-  font-weight: 800;
+  font-size: 1.74em;
+  font-weight: 500;
 `;
 const LoginWrapper = styled.div`
   position: absolute;
@@ -34,6 +35,12 @@ const LoginWrapper = styled.div`
   right: 33px;
   display: flex;
   align-items: center;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(1);
+  }
 `;
 const Button = styled.button`
   background-color: inherit;
@@ -42,7 +49,6 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid grey;
   z-index: 10;
 `;
 const ModeButton = styled.div`

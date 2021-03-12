@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
@@ -14,12 +14,10 @@ const Container = styled.div`
 `;
 const ShowHide = styled.div`
   top: 0;
-  /* padding: 5px; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* width: 100%; */
 `;
 const AdminBtns = styled.div`
   display: flex;
@@ -50,7 +48,33 @@ const SortedBrnad = styled.div`
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
-  flex: 1;
+  border: 1px dotted
+    ${(props) =>
+      props.selectedBrand === "cu"
+        ? "#0be881"
+        : props.selectedBrand === "gs"
+        ? "#18dcff"
+        : props.selectedBrand === "seven"
+        ? "#ff4d4d"
+        : props.selectedBrand === "emart"
+        ? "#ffd32a"
+        : null};
+  border-radius: 10px;
+`;
+const SortedBrandTitle = styled.div`
+  font-size: 0.75rem;
+  width: 100%;
+  text-align: center;
+  color: ${(props) =>
+    props.selectedBrand === "cu"
+      ? "#0be881"
+      : props.selectedBrand === "gs"
+      ? "#18dcff"
+      : props.selectedBrand === "seven"
+      ? "#ff4d4d"
+      : props.selectedBrand === "emart"
+      ? "#ffd32a"
+      : null};
 `;
 const LoaderWrapper = styled.div`
   width: 100%;
@@ -71,7 +95,6 @@ export default ({
   setEdit,
   editMode,
 }) => {
-  console.log("products?.products.brand", products?.products[0].brand);
   let prodProps;
   const setProdProps = (name, img, event, price) => {
     prodProps = { name, img, event, price };
@@ -118,7 +141,10 @@ export default ({
           {mode === "USER" &&
             selectedBrands.map((selectedBrand, index) => {
               return (
-                <SortedBrnad key={index}>
+                <SortedBrnad key={index} selectedBrand={selectedBrand}>
+                  <SortedBrandTitle selectedBrand={selectedBrand}>
+                    {selectedBrand}
+                  </SortedBrandTitle>
                   {products?.products
                     ?.filter((product) => product.brand === selectedBrand)
                     ?.map((product, index) => {

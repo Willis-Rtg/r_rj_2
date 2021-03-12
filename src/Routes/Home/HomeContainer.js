@@ -46,6 +46,10 @@ const HomeContainer = () => {
       setApiData({ data: await getConvenience.emart(), loading: false, brand });
   };
 
+  function onCategory(Index) {
+    console.log(Index);
+  }
+
   const [modal, setModal] = useState();
   const openModal = () => setModal(true);
   const closeModal = () => setModal(false);
@@ -62,6 +66,7 @@ const HomeContainer = () => {
     setMode,
     toggleBrand,
     selectedBrands,
+    onCategory,
   };
   return <HomePresenter {...props} />;
 };

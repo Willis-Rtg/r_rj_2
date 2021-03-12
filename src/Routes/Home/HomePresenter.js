@@ -40,6 +40,7 @@ const Categories = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
+const Category = styled.div``;
 
 const HomePresenter = ({
   modal,
@@ -53,6 +54,7 @@ const HomePresenter = ({
   setMode,
   toggleBrand,
   selectedBrands,
+  onCategory,
 }) => {
   return (
     <Conatiner>
@@ -79,6 +81,7 @@ const HomePresenter = ({
                       ? toggleBrand(e, brandname)
                       : callApi(brandname)
                   }
+                  className={index === 0 ? "onBrand" : null}
                 >
                   <Brand />
                 </BrandLogo>
@@ -86,8 +89,10 @@ const HomePresenter = ({
             })}
           </Brands>
           <Categories>
-            {CategoryIcons?.map((Type, index) => (
-              <Type key={index}></Type>
+            {CategoryIcons?.map((CategoryIcon, index) => (
+              <Category onClick={() => onCategory(index)}>
+                <CategoryIcon key={index} />
+              </Category>
             ))}
           </Categories>
           <Events />
