@@ -44,6 +44,7 @@ export default ({ email, name, password, password_confirm, setAction }) => {
           data: { createUser: newUser },
         } = await createUser();
         toast.success("Success to join");
+        console.log("onSubmit ~ newUser", newUser);
         setAction(true);
       } catch (e) {
         await toast.error(`Join error :${e.message}`);

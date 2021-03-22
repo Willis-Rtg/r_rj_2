@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Input from "../../Input";
 import { toast } from "react-toastify";
 import { useMutation } from "@apollo/react-hooks";
-import { LOGIN_USER, LOCAL_LOG_IN, SEND_MAIL } from "./LoginQueries";
+import { LOGIN_USER, LOCAL_LOG_IN } from "./LoginQueries";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
 
@@ -29,9 +29,9 @@ const SendBtn = styled.button`
 `;
 
 export default ({ email, password }) => {
-  const [sendMail] = useMutation(SEND_MAIL, {
-    variables: { email: email.value },
-  });
+  // const [sendMail] = useMutation(SEND_MAIL, {
+  //   variables: { email: email.value },
+  // });
   const [loginUser] = useMutation(LOGIN_USER, {
     variables: { email: email.value, password: password.value },
   });
@@ -59,21 +59,21 @@ export default ({ email, password }) => {
     }
   };
 
-  async function onSubmit_secret(e) {
-    e.preventDefault();
-    if (email.value && password.value)
-      try {
-        const {
-          data: { loginUser: token },
-        } = await loginUser();
-        if (token) {
-          localLogin({ variables: { token } });
-          window.location.href = "/";
-        } else throw Error();
-      } catch (e) {
-        console.log(e);
-      }
-  }
+  // async function onSubmit_secret(e) {
+  //   e.preventDefault();
+  //   if (email.value && password.value)
+  //     try {
+  //       const {
+  //         data: { loginUser: token },
+  //       } = await loginUser();
+  //       if (token) {
+  //         localLogin({ variables: { token } });
+  //         window.location.href = "/";
+  //       } else throw Error();
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  // }
 
   return (
     <LoginForm onSubmit={onSubmit_email}>
