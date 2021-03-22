@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import ProdListPresenter from "./ProdListPresenter";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { CREATE_PRODUCT } from "./ProdListQueries";
 import { DELETE_PRODUCTS } from "./ProdListQueries";
-import { PRODUCTS } from "./ProdListQueries";
+// import { PRODUCTS } from "./ProdListQueries";
 
 export default ({ selectedBrands, mode, apiData }) => {
   useEffect(() => console.log("Admin selectedBrands", selectedBrands), [

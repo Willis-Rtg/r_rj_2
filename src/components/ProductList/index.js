@@ -1,4 +1,3 @@
-import React from "react";
 import ProdListContainer from "./ProdListContainer";
 // import AdminProdListContainer from "./AdminProdListContainer";
 

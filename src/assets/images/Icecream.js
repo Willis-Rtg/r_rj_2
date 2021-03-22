@@ -1,7 +1,7 @@
 import React from "react";
 // import svg,{path,Ellipse } from "react-native-svg"
 
-function SvgComponent(props) {
+function Icecream(props) {
   return (
     <svg width={65} height={60} viewBox="0 0 511.999 511.999" {...props}>
       <path
@@ -62,4 +62,4 @@ function SvgComponent(props) {
   );
 }
 
-export default SvgComponent;
+export default Icecream;

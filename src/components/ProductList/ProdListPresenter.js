@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
@@ -8,21 +8,20 @@ const Container = styled.div`
   flex-wrap: row;
   justify-content: center;
   align-items: flex-start;
-  flex: 1;
+  flex-grow: 1;
   width: 100%;
   padding-top: 20px;
 `;
 const ShowHide = styled.div`
-  top: 0;
-  /* padding: 5px; */
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* width: 100%; */
 `;
 const AdminBtns = styled.div`
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -48,18 +47,61 @@ const ProductList = styled.div`
 const SortedBrnad = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-around;
-  flex: 1;
+  max-height: 600px;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  border: 1px dotted
+    ${(props) =>
+      props.selectedBrand === "cu"
+        ? "#0be881"
+        : props.selectedBrand === "gs"
+        ? "#18dcff"
+        : props.selectedBrand === "seven"
+        ? "#ff4d4d"
+        : props.selectedBrand === "emart"
+        ? "#ffd32a"
+        : null};
+  border-radius: 10px;
 `;
-const LoaderWrapper = styled.div`
+const SortedBrandTitle = styled.div`
+  font-size: 0.75rem;
   width: 100%;
-  padding: 50px;
+  text-align: center;
+  color: ${(props) =>
+    props.selectedBrand === "cu"
+      ? "#0be881"
+      : props.selectedBrand === "gs"
+      ? "#18dcff"
+      : props.selectedBrand === "seven"
+      ? "#ff4d4d"
+      : props.selectedBrand === "emart"
+      ? "#ffd32a"
+      : null};
+`;
+const SetCategory = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+const CategorySelect = styled.select`
+  &:focus {
+    border: 1px solid skyblue;
+  }
+`;
+const ProductClass = styled.div``;
+const ApiDatas = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
 `;
 
 export default ({
   selectedBrands,
-  catchData,
   insertData,
   deleteHandler,
   mode,
@@ -69,9 +111,8 @@ export default ({
   productsLoading,
   edit,
   setEdit,
-  editMode,
+  editProducts,
 }) => {
-  console.log("products?.products.brand", products?.products[0].brand);
   let prodProps;
   const setProdProps = (name, img, event, price) => {
     prodProps = { name, img, event, price };
@@ -84,24 +125,12 @@ export default ({
             <div style={{ display: "flex" }}>
               <Button onClick={() => insertData()}>insert</Button>
             </div>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                justifyContent: "space-around",
-                marginBottom: "5px",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <p>Products : </p>
-                <Button onClick={() => console.log("cu")}>cu</Button>
-                <Button onClick={() => console.log("gs")}>gs</Button>
-                <Button onClick={() => console.log("seven")}>seven</Button>
-                <Button onClick={() => console.log("emart")}>emart</Button>
-              </div>
-            </div>
-            <Button onClick={editMode}>{edit}</Button>
+            <Button onClick={() => setEdit(!edit)}>
+              {edit ? "edit mode" : "no eidt mode"}
+            </Button>
+            {edit && <Button onClick={() => editProducts()}> Edit </Button>}
             <div style={{ display: "flex", alignItems: "center" }}>
+              {" "}
               <p>Delete : </p>
               <Button onClick={() => deleteHandler()}>All</Button>
               <Button onClick={() => deleteHandler("cu")}>Cu</Button>
@@ -118,52 +147,98 @@ export default ({
           {mode === "USER" &&
             selectedBrands.map((selectedBrand, index) => {
               return (
-                <SortedBrnad key={index}>
+                <SortedBrnad key={index} selectedBrand={selectedBrand}>
+                  <SortedBrandTitle selectedBrand={selectedBrand}>
+                    {selectedBrand}
+                  </SortedBrandTitle>
                   {products?.products
                     ?.filter((product) => product.brand === selectedBrand)
                     ?.map((product, index) => {
-                      return <Product {...product} key={index} />;
+                      return (
+                        <ProductClass className="product">
+                          <Product {...product} key={index} />
+                        </ProductClass>
+                      );
                     })}
                 </SortedBrnad>
               );
             })}
           {mode === "ADMIN" &&
-            apiData?.data?.map((item, index) => {
-              apiData.brand === "gs" &&
-                setProdProps(
-                  item.goodsNm,
-                  item.attFileNm,
-                  item.eventTypeNm,
-                  item.price
-                );
-              apiData.brand === "cu" &&
-                setProdProps(
-                  item.querySelector(".prodName a")?.textContent,
-                  item.querySelector("img")?.getAttribute("src"),
-                  item.querySelector("ul li")?.textContent,
-                  item.querySelector(".prodPrice")?.textContent
-                );
-              apiData.brand === "seven" &&
-                setProdProps(
-                  item.querySelector(".name")?.textContent,
-                  "https://7-eleven.co.kr" +
-                    item.querySelector("img")?.getAttribute("src"),
-                  item.querySelector(".tag_list_01")?.textContent,
-                  item.querySelector(".price")?.textContent
-                );
-              apiData.brand === "emart" &&
-                setProdProps(
-                  item.querySelector(".productDiv")?.textContent,
-                  "https://www.emart24.co.kr/" +
-                    item.querySelector(".productImg img")?.getAttribute("src"),
-                  item
-                    .querySelector(".lable img")
-                    ?.getAttribute("alt")
-                    .substr(0, 5),
-                  item.querySelector(".price")?.textContent
-                );
-              return <Product key={index} {...prodProps} />;
+            edit &&
+            selectedBrands.map((selectedBrand, index) => {
+              return (
+                <SortedBrnad key={index} selectedBrand={selectedBrand}>
+                  <SortedBrandTitle selectedBrand={selectedBrand}>
+                    {selectedBrand}
+                  </SortedBrandTitle>
+                  {products?.products
+                    ?.filter((product) => product.brand === selectedBrand)
+                    ?.map((product, index) => {
+                      return (
+                        <SetCategory className="product">
+                          <Product {...product} key={index} />
+                          <CategorySelect className="category" tabIndex={0}>
+                            <option value="FOOD">FOOD</option>
+                            <option value="ICECREAM">ICECREAM</option>
+                            <option value="COOKIE">COOKIE</option>
+                            <option value="DRINK">DRINK</option>
+                            <option value="WARSH">WARSH</option>
+                            <option value="CLEAN">CLEAN</option>
+                            <option value="CANDY">CANDY</option>
+                            <option value="ETC">ETC</option>
+                          </CategorySelect>
+                        </SetCategory>
+                      );
+                    })}
+                </SortedBrnad>
+              );
             })}
+          {mode === "ADMIN" && (
+            <ApiDatas>
+              {apiData?.data?.map((item, index) => {
+                apiData.brand === "gs" &&
+                  setProdProps(
+                    item.goodsNm,
+                    item.attFileNm,
+                    item.eventTypeNm,
+                    item.price
+                  );
+                apiData.brand === "cu" &&
+                  setProdProps(
+                    item.querySelector(".prodName a")?.textContent,
+                    item.querySelector("img")?.getAttribute("src"),
+                    item.querySelector("ul li")?.textContent,
+                    item.querySelector(".prodPrice")?.textContent
+                  );
+                apiData.brand === "seven" &&
+                  setProdProps(
+                    item.querySelector(".name")?.textContent,
+                    "https://7-eleven.co.kr" +
+                      item.querySelector("img")?.getAttribute("src"),
+                    item.querySelector(".tag_list_01")?.textContent,
+                    item.querySelector(".price")?.textContent
+                  );
+                apiData.brand === "emart" &&
+                  setProdProps(
+                    item.querySelector(".productDiv")?.textContent,
+                    "https://www.emart24.co.kr/" +
+                      item
+                        .querySelector(".productImg img")
+                        ?.getAttribute("src"),
+                    item
+                      .querySelector(".lable img")
+                      ?.getAttribute("alt")
+                      .substr(0, 5),
+                    item.querySelector(".price")?.textContent
+                  );
+                return (
+                  <ProductClass className="product">
+                    <Product key={index} {...prodProps} />
+                  </ProductClass>
+                );
+              })}
+            </ApiDatas>
+          )}
         </ProductList>
       </ProductListWrapper>
     </Container>
