@@ -77,6 +77,10 @@ const HomePresenter = ({
           <Brands>
             {BrandLogos?.map((Brand, index) => {
               let brandname = Brand.name.toLowerCase();
+              if (index === 0) brandname = "cu";
+              if (index === 1) brandname = "gs";
+              if (index === 2) brandname = "seven";
+              if (index === 3) brandname = "emart";
               return (
                 <BrandLogo
                   key={index}
