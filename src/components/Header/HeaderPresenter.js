@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "..//Modal/Modal";
-import Portal from "..//Modal/Portal";
+import Modal from "../Modal/Modal";
+import Portal from "../Modal/Portal";
 import Login from "../../assets/Login";
 import Logout from "../../assets/Logout";
 

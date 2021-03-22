@@ -130,6 +130,7 @@ export default ({
             </Button>
             {edit && <Button onClick={() => editProducts()}> Edit </Button>}
             <div style={{ display: "flex", alignItems: "center" }}>
+              {" "}
               <p>Delete : </p>
               <Button onClick={() => deleteHandler()}>All</Button>
               <Button onClick={() => deleteHandler("cu")}>Cu</Button>

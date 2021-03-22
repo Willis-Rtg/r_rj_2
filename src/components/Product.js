@@ -60,7 +60,7 @@ const Price = styled.p`
   font-size: 0.63rem;
 `;
 
-export default ({ id, name, img, event, price }) => {
+export default ({ id, name, img, event, price, category }) => {
   return (
     <Container>
       <ProductId className="id">{id}</ProductId>

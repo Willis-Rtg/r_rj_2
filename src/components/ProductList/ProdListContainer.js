@@ -78,10 +78,9 @@ export default ({ selectedBrands, mode, apiData }) => {
     }
     console.log("Insert Done.");
   };
-
   const deleteHandler = async (brand) => {
-    let test = await deleteProducts({ variables: { brand } });
-    console.log("deleteHandler -> test", test);
+    let deielte = await deleteProducts({ variables: { brand } });
+    console.log(" deleteHandler ~ deielte", deielte);
   };
 
   const prodListProps = {
