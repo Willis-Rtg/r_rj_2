@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import Header from "../../Components/Header";
-import BrandLogos from "../../Components/BrandLogos";
-import CategoryIcons from "../../Components/CategoryIcons";
-import Events from "../../Components/Events";
-import ProductList from "../../Components/ProductList";
-import Loader from "../../Components/Loader";
+import Header from "../../components/Header";
+import BrandLogos from "../../components/BrandLogos";
+import CategoryIcons from "../../components/CategoryIcons";
+import Events from "../../components/Events";
+import ProductList from "../../components/ProductList";
+import Loader from "../../components/Loader";
 
 const Conatiner = styled.div`
   position: relative;
