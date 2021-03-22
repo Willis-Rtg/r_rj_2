@@ -40,7 +40,11 @@ const Categories = styled.div`
   padding: 0 10px;
   /* background-color: lightblue; */
 `;
-const Category = styled.div``;
+const Category = styled.div`
+  &:hover {
+    opacity: 0.5;
+  }
+`;
 
 const HomePresenter = ({
   modal,

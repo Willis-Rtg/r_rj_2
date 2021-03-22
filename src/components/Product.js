@@ -21,6 +21,9 @@ const Name = styled.div`
   white-space: nowrap;
   font-weight: 500;
 `;
+const ProductId = styled.div`
+  display: none;
+`;
 const Container = styled.div`
   width: 68px;
   height: 100px;
@@ -57,9 +60,10 @@ const Price = styled.p`
   font-size: 0.63rem;
 `;
 
-export default ({ name, img, event, price }) => {
+export default ({ id, name, img, event, price }) => {
   return (
-    <Container className="product">
+    <Container>
+      <ProductId className="id">{id}</ProductId>
       <Name className="name">{name}</Name>
       <Tooltip>{name}</Tooltip>
       <Img className="img" src={img} alt={name} />

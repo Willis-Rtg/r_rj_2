@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ProdListPresenter from "./ProdListPresenter";
 import { useMutation, useQuery } from "@apollo/react-hooks";
-import { CREATE_PRODUCT } from "./ProdListQueries";
-import { DELETE_PRODUCTS } from "./ProdListQueries";
+import {
+  CREATE_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCTS,
+} from "./ProdListQueries";
 import { PRODUCTS } from "./ProdListQueries";
 
 export default ({ selectedBrands, mode, apiData }) => {
@@ -10,11 +13,14 @@ export default ({ selectedBrands, mode, apiData }) => {
     selectedBrands,
   ]);
 
-  const [edit, setEdit] = useState("edit");
+  const [edit, setEdit] = useState(false);
   const [createProduct] = useMutation(CREATE_PRODUCT);
+  const [editProduct] = useMutation(UPDATE_PRODUCT);
   const { data: products, loading: productsLoading } = useQuery(PRODUCTS, {
     variables: { brand: selectedBrands },
   });
+  const [deleteProducts] = useMutation(DELETE_PRODUCTS);
+
   const [sortedProd, setSortedProd] = useState({});
 
   useEffect(() => {
@@ -26,17 +32,25 @@ export default ({ selectedBrands, mode, apiData }) => {
     });
   }, [products]);
 
-  const [deleteProducts] = useMutation(DELETE_PRODUCTS);
   let productsInfo;
-  let name, event, price, img;
+  let name, event, price, img, id, category;
 
-  const catchData = () => {
+  const editProducts = async () => {
+    console.log("Start edit");
     productsInfo = document.getElementsByClassName("product");
     for (let item of productsInfo) {
-      img = item.querySelector(".img").getAttribute("src");
+      id = item.querySelector(".id").textContent;
+      let categorySelect = item.querySelector(".category");
+      category = categorySelect.options[categorySelect.selectedIndex].value;
+      try {
+        const editedProd = await editProduct({ variables: { id, category } });
+        console.log(" editedProd", editedProd);
+      } catch (error) {
+        console.log(error);
+      }
     }
+    console.log("Done edit");
   };
-
   const insertData = async () => {
     console.log("Start insert");
     productsInfo = document.getElementsByClassName("product");
@@ -65,10 +79,6 @@ export default ({ selectedBrands, mode, apiData }) => {
     console.log("Insert Done.");
   };
 
-  const editMode = async () => {
-    edit === "edit" ? setEdit("none") : setEdit("edit");
-  };
-
   const deleteHandler = async (brand) => {
     let test = await deleteProducts({ variables: { brand } });
     console.log("deleteHandler -> test", test);
@@ -76,7 +86,6 @@ export default ({ selectedBrands, mode, apiData }) => {
 
   const prodListProps = {
     selectedBrands,
-    catchData,
     insertData,
     deleteHandler,
     mode,
@@ -86,7 +95,7 @@ export default ({ selectedBrands, mode, apiData }) => {
     productsLoading,
     edit,
     setEdit,
-    editMode,
+    editProducts,
   };
   return <ProdListPresenter {...prodListProps} />;
 };

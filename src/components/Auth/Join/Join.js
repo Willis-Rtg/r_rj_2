@@ -5,6 +5,7 @@ import { CREATE_USER } from "./JoinQueries";
 import { useMutation } from "@apollo/react-hooks";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { toast } from "react-toastify";
 
 const LoginForm = styled.form`
   width: 100%;
@@ -32,6 +33,7 @@ export default ({ email, name, password, password_confirm, setAction }) => {
     variables: {
       email: email.value,
       name: name.value,
+      password: password.value,
     },
   });
   const onSubmit = async (e) => {
@@ -41,10 +43,10 @@ export default ({ email, name, password, password_confirm, setAction }) => {
         const {
           data: { createUser: newUser },
         } = await createUser();
-        console.log("onSubmit -> newUser", newUser);
+        toast.success("Success to join");
         setAction(true);
       } catch (e) {
-        console.log(e);
+        await toast.error(`Join error :${e.message}`);
       }
   };
   return (

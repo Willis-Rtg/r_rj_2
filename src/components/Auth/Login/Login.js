@@ -33,17 +33,25 @@ export default ({ email, password }) => {
     variables: { email: email.value },
   });
   const [loginUser] = useMutation(LOGIN_USER, {
-    variables: { email: email.value, secret: password.value },
+    variables: { email: email.value, password: password.value },
   });
   const [localLogin] = useMutation(LOCAL_LOG_IN);
   const onSubmit_email = async (e) => {
     e.preventDefault();
     if (email.value !== "") {
       try {
+        // const {
+        //   data: { sendMail: sendSecret },
+        // } = await sendMail();
+        // if (!sendSecret) throw Error("have the error for sending secret");
         const {
-          data: { sendMail: sendSecret },
-        } = await sendMail();
-        if (!sendSecret) throw Error("have the error for sending secret");
+          data: { loginUser: token },
+        } = await loginUser();
+        if (token) {
+          localLogin({ variables: { token } });
+          toast.success("Success to log in");
+          window.location.href = "/";
+        } else throw Error();
       } catch (e) {
         console.log(e);
         toast.error("have a error");

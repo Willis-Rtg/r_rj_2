@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import HomePresenter from "./HomePresenter";
 import { useQuery } from "@apollo/react-hooks";
 import { ME } from "./HomeQueries";
@@ -9,9 +9,8 @@ const ADMIN_ROLE = "ADMIN";
 
 const HomeContainer = () => {
   const { data: loginData, loading: loginLoading } = useQuery(ME);
-  console.log("HomeContainer -> loginData", loginData);
   const [mode, setMode] = useState(USER_ROLE);
-
+  const [category, setCategory] = useState(0);
   const [selectedBrands, setSelectedBrands] = useState(["cu"]);
   const toggleBrand = (e, brandname) => {
     e.target.classList.toggle("onBrand");
@@ -46,8 +45,9 @@ const HomeContainer = () => {
       setApiData({ data: await getConvenience.emart(), loading: false, brand });
   };
 
-  function onCategory(Index) {
-    console.log(Index);
+  function onCategory(index) {
+    console.log(category);
+    setCategory(index);
   }
 
   const [modal, setModal] = useState();

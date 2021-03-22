@@ -44,6 +44,16 @@ export const PRODUCTS = gql`
   }
 `;
 
+export const UPDATE_PRODUCT = gql`
+  mutation updateProducts($id: String, $category: String) {
+    updateProducts(id: $id, category: $category) {
+      name
+      brand
+      category
+    }
+  }
+`;
+
 export const DELETE_PRODUCTS = gql`
   mutation deleteProducts($brand: String) {
     deleteProducts(brand: $brand) {
