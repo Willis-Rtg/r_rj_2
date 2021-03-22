@@ -5,7 +5,7 @@ import { ME } from "./HomeQueries";
 import getConvenience from "../../api/api";
 
 const USER_ROLE = "USER";
-const ADMIN_ROLE = "ADMIN";
+// const ADMIN_ROLE = "ADMIN";
 
 const HomeContainer = () => {
   const { data: loginData, loading: loginLoading } = useQuery(ME);

@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import HeaderPresenter from "./HeaderPresenter";
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation } from "@apollo/react-hooks";
 import { LOCAL_LOG_OUT } from "./HeaderQueries";
 
 export default ({ modal, openModal, closeModal, loginData, mode, setMode }) => {

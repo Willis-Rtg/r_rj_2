@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import NanumGothic from "../assets/fonts/NanumGothic-Regular.ttf";
 import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
