@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
-import { defaultDataIdFromObject } from "apollo-cache-inmemory";
 
 const Container = styled.div`
   display: flex;
