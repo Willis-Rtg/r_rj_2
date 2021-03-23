@@ -40,6 +40,7 @@ export const PRODUCTS = gql`
       brand
       event
       price
+      category
     }
   }
 `;

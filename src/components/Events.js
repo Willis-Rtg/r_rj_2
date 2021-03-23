@@ -13,14 +13,19 @@ const Text = styled.div`
   /* border: 1px solid gray; */
   padding: 2px 7px;
   border-radius: 14px;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
 `;
 
-const Events = () => {
+const Events = ({ setSelectedEvent }) => {
   return (
     <Container>
-      <Text>1+1</Text>
-      <Text>2+1</Text>
-      <Text>3+1</Text>
+      <Text onClick={() => setSelectedEvent(0)}>All</Text>
+      <Text onClick={() => setSelectedEvent(1)}>1+1</Text>
+      <Text onClick={() => setSelectedEvent(2)}>2+1</Text>
+      <Text onClick={() => setSelectedEvent(3)}>Etc</Text>
     </Container>
   );
 };

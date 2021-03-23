@@ -8,7 +8,13 @@ import {
 } from "./ProdListQueries";
 import { PRODUCTS } from "./ProdListQueries";
 
-export default ({ selectedBrands, mode, apiData }) => {
+export default ({
+  selectedBrands,
+  mode,
+  apiData,
+  selectedCategory,
+  selectedEvent,
+}) => {
   useEffect(() => console.log("selectedBrands", selectedBrands), [
     selectedBrands,
   ]);
@@ -40,8 +46,8 @@ export default ({ selectedBrands, mode, apiData }) => {
     productsInfo = document.getElementsByClassName("product");
     for (let item of productsInfo) {
       id = item.querySelector(".id").textContent;
-      let categorySelect = item.querySelector(".category");
-      category = categorySelect.options[categorySelect.selectedIndex].value;
+      let categorySelect = item.querySelector(".categorySelect");
+      category = categorySelect?.options[categorySelect?.selectedIndex].value;
       try {
         const editedProd = await editProduct({ variables: { id, category } });
         console.log(" editedProd", editedProd);
@@ -55,10 +61,17 @@ export default ({ selectedBrands, mode, apiData }) => {
     console.log("Start insert");
     productsInfo = document.getElementsByClassName("product");
     for (let item of productsInfo) {
-      name = item.querySelector(".name").textContent;
-      event = item.querySelector(".event").textContent;
-      price = item.querySelector(".price").textContent;
-      img = item.querySelector(".img").getAttribute("src");
+      name = item.querySelector(".name").textContent.replace(/^\s+|\s+$/gm, "");
+      event = item
+        .querySelector(".event")
+        .textContent.replace(/^\s+|\s+$/gm, "");
+      price = item
+        .querySelector(".price")
+        .textContent.replace(/^\s+|\s+$/gm, "");
+      img = item
+        .querySelector(".img")
+        .getAttribute("src")
+        .replace(/^\s+|\s+$/gm, "");
       try {
         const newProduct = await createProduct({
           variables: {
@@ -95,6 +108,8 @@ export default ({ selectedBrands, mode, apiData }) => {
     edit,
     setEdit,
     editProducts,
+    selectedCategory,
+    selectedEvent,
   };
   return <ProdListPresenter {...prodListProps} />;
 };

@@ -38,12 +38,18 @@ const Categories = styled.div`
   justify-content: space-around;
   align-items: center;
   padding: 0 10px;
+  z-index: 0;
   /* background-color: lightblue; */
 `;
 const Category = styled.div`
   &:hover {
     opacity: 0.5;
   }
+  &:active {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+  border-radius: 50px;
+  z-index: 10;
 `;
 
 const HomePresenter = ({
@@ -58,7 +64,10 @@ const HomePresenter = ({
   setMode,
   toggleBrand,
   selectedBrands,
+  selectedCategory,
   onCategory,
+  selectedEvent,
+  setSelectedEvent,
 }) => {
   return (
     <Conatiner>
@@ -98,16 +107,21 @@ const HomePresenter = ({
           </Brands>
           <Categories>
             {CategoryIcons?.map((CategoryIcon, index) => (
-              <Category onClick={() => onCategory(index)}>
+              <Category
+                className="category"
+                onClick={(e) => onCategory(e, index)}
+              >
                 <CategoryIcon key={index} />
               </Category>
             ))}
           </Categories>
-          <Events />
+          <Events setSelectedEvent={setSelectedEvent} />
           <ProductList
             selectedBrands={selectedBrands}
             mode={mode}
             apiData={apiData}
+            selectedCategory={selectedCategory}
+            selectedEvent={selectedEvent}
           />
         </>
       )}

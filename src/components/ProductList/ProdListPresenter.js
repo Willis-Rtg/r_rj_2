@@ -2,10 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
+import { defaultDataIdFromObject } from "apollo-cache-inmemory";
 
 const Container = styled.div`
   display: flex;
-  flex-wrap: row;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
   flex-grow: 1;
@@ -112,6 +113,8 @@ export default ({
   edit,
   setEdit,
   editProducts,
+  selectedCategory,
+  selectedEvent,
 }) => {
   let prodProps;
   const setProdProps = (name, img, event, price) => {
@@ -153,6 +156,41 @@ export default ({
                   </SortedBrandTitle>
                   {products?.products
                     ?.filter((product) => product.brand === selectedBrand)
+                    ?.filter((product) => {
+                      switch (selectedCategory) {
+                        case 1:
+                          return product.category === "FOOD";
+                        case 2:
+                          return product.category === "ICEREAM";
+                        case 3:
+                          return product.category === "COOKIE";
+                        case 4:
+                          return product.category === "DRINK";
+                        case 5:
+                          return product.category === "WARSH";
+                        case 6:
+                          return product.category === "CLEAN";
+                        case 7:
+                          return product.category === "CANDY";
+                        case 8:
+                          return product.category === "ETC";
+                        default:
+                          return product;
+                      }
+                    })
+                    ?.filter((product) => {
+                      let event = product.event?.substring(0, 3).trim();
+                      switch (selectedEvent) {
+                        case 1:
+                          return event === "1+1";
+                        case 2:
+                          return event === "2+1";
+                        case 3:
+                          return event !== "1+1" && event !== "2+1";
+                        default:
+                          return product;
+                      }
+                    })
                     ?.map((product, index) => {
                       return (
                         <ProductClass className="product">
@@ -177,7 +215,10 @@ export default ({
                       return (
                         <SetCategory className="product">
                           <Product {...product} key={index} />
-                          <CategorySelect className="category" tabIndex={0}>
+                          <CategorySelect
+                            className="categorySelect"
+                            tabIndex={0}
+                          >
                             <option value="FOOD">FOOD</option>
                             <option value="ICECREAM">ICECREAM</option>
                             <option value="COOKIE">COOKIE</option>

@@ -10,8 +10,10 @@ const USER_ROLE = "USER";
 const HomeContainer = () => {
   const { data: loginData, loading: loginLoading } = useQuery(ME);
   const [mode, setMode] = useState(USER_ROLE);
-  const [category, setCategory] = useState(0);
   const [selectedBrands, setSelectedBrands] = useState(["cu"]);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+  const [selectedEvent, setSelectedEvent] = useState(0);
+
   const toggleBrand = (e, brandname) => {
     e.target.classList.toggle("onBrand");
     let index = selectedBrands?.indexOf(brandname);
@@ -24,6 +26,9 @@ const HomeContainer = () => {
             (selectedBrand) => selectedBrand !== brandname
           );
         });
+  };
+  const onCategory = (e, index) => {
+    setSelectedCategory(index);
   };
 
   const [apiData, setApiData] = useState({
@@ -45,11 +50,6 @@ const HomeContainer = () => {
       setApiData({ data: await getConvenience.emart(), loading: false, brand });
   };
 
-  function onCategory(index) {
-    console.log(category);
-    setCategory(index);
-  }
-
   const [modal, setModal] = useState();
   const openModal = () => setModal(true);
   const closeModal = () => setModal(false);
@@ -66,7 +66,10 @@ const HomeContainer = () => {
     setMode,
     toggleBrand,
     selectedBrands,
+    selectedCategory,
     onCategory,
+    selectedEvent,
+    setSelectedEvent,
   };
   return <HomePresenter {...props} />;
 };
