@@ -67,7 +67,7 @@ export default ({ selectedBrands, mode, apiData }) => {
             event,
             price,
             img,
-            category: "",
+            category,
             description: "",
           },
         });

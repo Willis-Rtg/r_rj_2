@@ -7,7 +7,7 @@ export const CREATE_PRODUCT = gql`
     $event: String!
     $price: String!
     $img: String!
-    $category: String!
+    $category: String
     $description: String!
   ) {
     createProduct(
