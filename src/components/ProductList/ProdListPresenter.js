@@ -50,6 +50,7 @@ const SortedBrnad = styled.div`
   /* align-items: center; */
   justify-content: space-around;
   max-height: 600px;
+  min-width: 52px;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
