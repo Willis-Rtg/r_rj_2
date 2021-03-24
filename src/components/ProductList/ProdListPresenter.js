@@ -161,7 +161,7 @@ export default ({
                         case 1:
                           return product.category === "FOOD";
                         case 2:
-                          return product.category === "ICEREAM";
+                          return product.category === "ICECREAM";
                         case 3:
                           return product.category === "COOKIE";
                         case 4:
