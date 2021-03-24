@@ -59,23 +59,23 @@ const ModalContent = styled.div`
 const Img = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
-  min-width: 152px;
-  min-height: 152px;
+  min-width: 22vw;
+  min-height: 22vh;
 `;
 const Event = styled.div`
   font-size: 0.9rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem;
 `;
 const Price = styled.div`
   font-size: 1rem;
 `;
-const Detail = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  font-size: 0.45rem;
-  color: #3498db;
-`;
+// const Detail = styled.div`
+//   position: absolute;
+//   bottom: 0;
+//   right: 0;
+//   font-size: 0.45rem;
+//   color: #3498db;
+// `;
 
 const ProductModal = ({ setProductModal, clickedProps }) => {
   return (
@@ -89,7 +89,7 @@ const ProductModal = ({ setProductModal, clickedProps }) => {
           <Img src={clickedProps.clickedImg} />
           <Event>{clickedProps.clickedEvent}</Event>
           <Price>{clickedProps.clickedPrice}</Price>
-          <Detail>자세히 보기...</Detail>
+          {/* <Detail>자세히 보기...</Detail> */}
         </ModalContent>
       </ModalWrapper>
     </ModalBg>
