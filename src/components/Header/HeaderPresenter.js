@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Modal from "../Modal/Modal";
-import Portal from "../Modal/Portal";
+import LoginModal from "../Modal/LoginModal";
 import Login from "../../assets/Login";
 import Logout from "../../assets/Logout";
 
@@ -59,9 +58,8 @@ const ModeButton = styled.div`
 `;
 
 export default ({
-  modal,
-  openModal,
-  closeModal,
+  loginModal,
+  setLoginModal,
   loginData,
   mode,
   changeMode,
@@ -77,17 +75,14 @@ export default ({
       <AppTitle>
         <Title> 알뜰.편 </Title>
         <LoginWrapper>
-          <Button onClick={loginData ? logoutHandler : openModal}>
+          <Button
+            onClick={loginData ? logoutHandler : () => setLoginModal(true)}
+          >
             {loginData ? <Logout /> : <Login />}
           </Button>
         </LoginWrapper>
       </AppTitle>
-      <div id="modal"></div>
-      {modal && (
-        <Portal>
-          <Modal closeModal={closeModal} />
-        </Portal>
-      )}
+      {loginModal && <LoginModal setLoginModal={setLoginModal}></LoginModal>}
     </Conatiner>
   );
 };

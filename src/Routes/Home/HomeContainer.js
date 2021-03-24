@@ -50,14 +50,11 @@ const HomeContainer = () => {
       setApiData({ data: await getConvenience.emart(), loading: false, brand });
   };
 
-  const [modal, setModal] = useState();
-  const openModal = () => setModal(true);
-  const closeModal = () => setModal(false);
+  const [loginModal, setLoginModal] = useState(false);
 
   const props = {
-    modal,
-    openModal,
-    closeModal,
+    loginModal,
+    setLoginModal,
     loginData,
     loginLoading,
     callApi,

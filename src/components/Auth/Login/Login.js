@@ -81,7 +81,7 @@ export default ({ email, password }) => {
       <Input
         name="password"
         type="password"
-        placeholder="이메일"
+        placeholder="비밀번호"
         {...password}
       />
       <SendBtn type="submit">

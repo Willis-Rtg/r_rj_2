@@ -26,6 +26,7 @@ export default ({
     variables: { brand: selectedBrands },
   });
   const [deleteProducts] = useMutation(DELETE_PRODUCTS);
+  const [productModal, setProductModal] = useState(false);
 
   const [sortedProd, setSortedProd] = useState({});
 
@@ -37,6 +38,24 @@ export default ({
       emart: products?.products?.filter((product) => product.brand === "emart"),
     });
   }, [products]);
+
+  const [clickedProps, setClickedProps] = useState({});
+  const onProduct = async (e) => {
+    e.stopPropagation();
+    let clickedBrand = e.currentTarget.querySelector(".brand").textContent;
+    let clickedName = e.currentTarget.querySelector(".name").textContent;
+    let clickedImg = e.currentTarget.querySelector(".img").getAttribute("src");
+    let clickedEvent = e.currentTarget.querySelector(".event").textContent;
+    let clickedPrice = e.currentTarget.querySelector(".price").textContent;
+    setClickedProps({
+      clickedBrand,
+      clickedName,
+      clickedImg,
+      clickedEvent,
+      clickedPrice,
+    });
+    await setProductModal(true);
+  };
 
   let productsInfo;
   let name, event, price, img, id, category;
@@ -110,6 +129,10 @@ export default ({
     editProducts,
     selectedCategory,
     selectedEvent,
+    onProduct,
+    productModal,
+    setProductModal,
+    clickedProps,
   };
   return <ProdListPresenter {...prodListProps} />;
 };

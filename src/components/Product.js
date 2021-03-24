@@ -27,6 +27,9 @@ const ProductId = styled.div`
 const Category = styled.div`
   display: none;
 `;
+const Brand = styled.div`
+  display: none;
+`;
 const Container = styled.div`
   width: 68px;
   height: 100px;
@@ -52,8 +55,8 @@ const Container = styled.div`
 const Img = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
-  width: 52px;
-  height: 52px;
+  min-width: 52px;
+  min-height: 52px;
 `;
 const Event = styled.p`
   font-size: 0.62rem;
@@ -63,10 +66,11 @@ const Price = styled.p`
   font-size: 0.63rem;
 `;
 
-export default ({ id, name, img, event, price, category }) => {
+export default ({ id, brand, name, img, event, price, category }) => {
   return (
     <Container>
       <ProductId className="id">{id}</ProductId>
+      <Brand className="brand">{brand}</Brand>
       <Category className="category">{category}</Category>
       <Name className="name">{name}</Name>
       <Tooltip>{name}</Tooltip>

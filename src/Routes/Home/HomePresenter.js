@@ -53,9 +53,8 @@ const Category = styled.div`
 `;
 
 const HomePresenter = ({
-  modal,
-  openModal,
-  closeModal,
+  loginModal,
+  setLoginModal,
   loginData,
   loginLoading,
   mode,
@@ -76,9 +75,8 @@ const HomePresenter = ({
       ) : (
         <>
           <Header
-            modal={modal}
-            openModal={openModal}
-            closeModal={closeModal}
+            loginModal={loginModal}
+            setLoginModal={setLoginModal}
             loginData={loginData}
             mode={mode}
             setMode={setMode}

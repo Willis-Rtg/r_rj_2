@@ -3,7 +3,7 @@ import HeaderPresenter from "./HeaderPresenter";
 import { useMutation } from "@apollo/react-hooks";
 import { LOCAL_LOG_OUT } from "./HeaderQueries";
 
-export default ({ modal, openModal, closeModal, loginData, mode, setMode }) => {
+export default ({ loginModal, setLoginModal, loginData, mode, setMode }) => {
   const changeMode = (e) => {
     e.preventDefault();
     if (mode === "USER") setMode("ADMIN");
@@ -17,9 +17,8 @@ export default ({ modal, openModal, closeModal, loginData, mode, setMode }) => {
     return;
   };
   const props = {
-    modal,
-    openModal,
-    closeModal,
+    loginModal,
+    setLoginModal,
     loginData,
     mode,
     changeMode,

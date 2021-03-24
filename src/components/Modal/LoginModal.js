@@ -16,6 +16,7 @@ const ModalBg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 `;
 const ModalWrapper = styled.div`
   display: flex;
@@ -76,7 +77,7 @@ const ForLogin = styled.p`
   }
 `;
 
-const Modal = ({ closeModal }) => {
+const LoginModal = ({ setLoginModal }) => {
   const email = useInput("");
   const name = useInput("");
   const password = useInput("");
@@ -89,7 +90,7 @@ const Modal = ({ closeModal }) => {
       <ModalWrapper>
         <ModalHeader>
           <ModalTitle>{action ? "로그인" : "회원가입"}</ModalTitle>
-          <CloseBtn onClick={closeModal}>X</CloseBtn>
+          <CloseBtn onClick={() => setLoginModal(false)}>X</CloseBtn>
         </ModalHeader>
         <ModalContent>
           {action ? <Login {...loginProps} /> : <Join {...joinProps} />}
@@ -106,4 +107,4 @@ const Modal = ({ closeModal }) => {
   );
 };
 
-export default Modal;
+export default LoginModal;

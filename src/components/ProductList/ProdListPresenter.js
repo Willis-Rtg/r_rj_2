@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
+import ProductModal from "../Modal/ProductModal";
 
 const Container = styled.div`
   display: flex;
@@ -49,6 +50,7 @@ const SortedBrnad = styled.div`
   flex-wrap: wrap;
   /* align-items: center; */
   justify-content: space-around;
+  position: relative;
   max-height: 600px;
   min-width: 52px;
   overflow-y: scroll;
@@ -94,7 +96,9 @@ const CategorySelect = styled.select`
     border: 1px solid skyblue;
   }
 `;
-const ProductClass = styled.div``;
+const ProductClass = styled.div`
+  z-index: 1;
+`;
 const ApiDatas = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -115,6 +119,10 @@ export default ({
   editProducts,
   selectedCategory,
   selectedEvent,
+  onProduct,
+  productModal,
+  setProductModal,
+  clickedProps,
 }) => {
   let prodProps;
   const setProdProps = (name, img, event, price) => {
@@ -133,7 +141,6 @@ export default ({
             </Button>
             {edit && <Button onClick={() => editProducts()}> Edit </Button>}
             <div style={{ display: "flex", alignItems: "center" }}>
-              {" "}
               <p>Delete : </p>
               <Button onClick={() => deleteHandler()}>All</Button>
               <Button onClick={() => deleteHandler("cu")}>Cu</Button>
@@ -193,11 +200,20 @@ export default ({
                     })
                     ?.map((product, index) => {
                       return (
-                        <ProductClass className="product">
+                        <ProductClass
+                          className="product"
+                          onClick={(e) => onProduct(e)}
+                        >
                           <Product {...product} key={index} />
                         </ProductClass>
                       );
                     })}
+                  {productModal && (
+                    <ProductModal
+                      setProductModal={setProductModal}
+                      clickedProps={clickedProps}
+                    />
+                  )}
                 </SortedBrnad>
               );
             })}
