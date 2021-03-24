@@ -32,7 +32,9 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: center;
 `;
-const ModalTitle = styled.div``;
+const ModalTitle = styled.div`
+  text-align: center;
+`;
 const CloseBtn = styled.button`
   position: absolute;
   top: -13px;
@@ -59,8 +61,8 @@ const ModalContent = styled.div`
 const Img = styled.div`
   background-image: url(${(props) => props.src});
   background-size: cover;
-  min-width: 22vw;
-  min-height: 22vh;
+  min-width: 200px;
+  min-height: 200px;
 `;
 const Event = styled.div`
   font-size: 0.9rem;
