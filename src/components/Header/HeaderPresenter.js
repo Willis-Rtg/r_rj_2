@@ -12,7 +12,6 @@ const Conatiner = styled.div`
   justify-content: space-between;
   width: 100%;
   margin: 2px 0;
-  /* flex: 1; */
 `;
 const AppTitle = styled.div`
   display: flex;

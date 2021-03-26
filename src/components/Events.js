@@ -7,7 +7,7 @@ const Container = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-const Text = styled.div`
+const Event = styled.div`
   padding-horizontal: 20px;
   font-size: 20px;
   /* border: 1px solid gray; */
@@ -19,13 +19,21 @@ const Text = styled.div`
   }
 `;
 
-const Events = ({ setSelectedEvent }) => {
+const Events = ({ onEvent }) => {
   return (
     <Container>
-      <Text onClick={() => setSelectedEvent(0)}>All</Text>
-      <Text onClick={() => setSelectedEvent(1)}>1+1</Text>
-      <Text onClick={() => setSelectedEvent(2)}>2+1</Text>
-      <Text onClick={() => setSelectedEvent(3)}>Etc</Text>
+      <Event className="event onEvent" onClick={(e) => onEvent(e, 0)}>
+        All
+      </Event>
+      <Event className="event" onClick={(e) => onEvent(e, 1)}>
+        1+1
+      </Event>
+      <Event className="event" onClick={(e) => onEvent(e, 2)}>
+        2+1
+      </Event>
+      <Event className="event" onClick={(e) => onEvent(e, 3)}>
+        Etc
+      </Event>
     </Container>
   );
 };

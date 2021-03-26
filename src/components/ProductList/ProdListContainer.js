@@ -40,7 +40,7 @@ export default ({
   }, [products]);
 
   const [clickedProps, setClickedProps] = useState({});
-  const onProduct = async (e) => {
+  const onProduct = (e) => {
     e.stopPropagation();
     let clickedBrand = e.currentTarget.querySelector(".brand").textContent;
     let clickedName = e.currentTarget.querySelector(".name").textContent;
@@ -54,7 +54,7 @@ export default ({
       clickedEvent,
       clickedPrice,
     });
-    await setProductModal(true);
+    setProductModal(true);
   };
 
   let productsInfo;

@@ -28,7 +28,18 @@ const HomeContainer = () => {
         });
   };
   const onCategory = (e, index) => {
+    const catoegries = e.currentTarget.parentElement.querySelectorAll(
+      ".category"
+    );
+    catoegries.forEach((category) => category.classList.remove("onCategory"));
+    e.currentTarget.classList.add("onCategory");
     setSelectedCategory(index);
+  };
+  const onEvent = (e, index) => {
+    const events = e.currentTarget.parentElement.querySelectorAll(".event");
+    events.forEach((event) => event.classList.remove("onEvent"));
+    e.currentTarget.classList.add("onEvent");
+    setSelectedEvent(index);
   };
 
   const [apiData, setApiData] = useState({
@@ -66,7 +77,7 @@ const HomeContainer = () => {
     selectedCategory,
     onCategory,
     selectedEvent,
-    setSelectedEvent,
+    onEvent,
   };
   return <HomePresenter {...props} />;
 };

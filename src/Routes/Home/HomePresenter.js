@@ -51,7 +51,6 @@ const Category = styled.div`
   border-radius: 50px;
   z-index: 10;
 `;
-
 const HomePresenter = ({
   loginModal,
   setLoginModal,
@@ -66,7 +65,7 @@ const HomePresenter = ({
   selectedCategory,
   onCategory,
   selectedEvent,
-  setSelectedEvent,
+  onEvent,
 }) => {
   return (
     <Conatiner>
@@ -106,14 +105,14 @@ const HomePresenter = ({
           <Categories>
             {CategoryIcons?.map((CategoryIcon, index) => (
               <Category
-                className="category"
+                className={index === 0 ? "onCategory category" : "category"}
                 onClick={(e) => onCategory(e, index)}
               >
                 <CategoryIcon key={index} />
               </Category>
             ))}
           </Categories>
-          <Events setSelectedEvent={setSelectedEvent} />
+          <Events onEvent={onEvent} />
           <ProductList
             selectedBrands={selectedBrands}
             mode={mode}
