@@ -22,7 +22,7 @@ const resolvers = {
 };
 
 export default new ApolloClient({
-  uri: "https://r-prisma1.herokuapp.com/",
+  uri: "https://r-prisma.herokuapp.com/",
   // : "https://eu1.prisma.sh/kshwan1023-33bb1f/r_prisma/dev",
   clientState: {
     defaults,
