@@ -186,7 +186,10 @@ export default ({
                       }
                     })
                     ?.filter((product) => {
-                      let event = product.event?.substring(0, 3).trim();
+                      let event = product.event
+                        ?.replace(/ /g, "")
+                        .substring(0, 3)
+                        .trim();
                       switch (selectedEvent) {
                         case 1:
                           return event === "1+1";
