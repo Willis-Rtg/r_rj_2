@@ -4,7 +4,7 @@ export default async (api) => {
     "http://gs25.gsretail.com/gscvs/ko/products/event-goods-search",
     {
       params: {
-        pageSize: 3000,
+        pageSize: 10,
       },
     }
   );
