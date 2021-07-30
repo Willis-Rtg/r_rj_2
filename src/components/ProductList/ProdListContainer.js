@@ -6,7 +6,8 @@ import {
   UPDATE_PRODUCT,
   DELETE_PRODUCTS,
 } from "./ProdListQueries";
-import { PRODUCTS } from "./ProdListQueries";
+import { SEE_PRODUCTS } from "./ProdListQueries";
+import useInput from "../../Hooks/useInput";
 
 export default ({
   selectedBrands,
@@ -15,14 +16,15 @@ export default ({
   selectedCategory,
   selectedEvent,
 }) => {
-  useEffect(() => console.log("selectedBrands", selectedBrands), [
-    selectedBrands,
-  ]);
+  useEffect(
+    () => console.log("selectedBrands", selectedBrands),
+    [selectedBrands]
+  );
 
   const [edit, setEdit] = useState(false);
   const [createProduct] = useMutation(CREATE_PRODUCT);
   const [editProduct] = useMutation(UPDATE_PRODUCT);
-  const { data: products, loading: productsLoading } = useQuery(PRODUCTS, {
+  const { data: products, loading: productsLoading } = useQuery(SEE_PRODUCTS, {
     variables: { brand: selectedBrands },
   });
   const [deleteProducts] = useMutation(DELETE_PRODUCTS);
@@ -32,10 +34,14 @@ export default ({
 
   useEffect(() => {
     setSortedProd({
-      cu: products?.products?.filter((product) => product.brand === "cu"),
-      gs: products?.products?.filter((product) => product.brand === "gs"),
-      seven: products?.products?.filter((product) => product.brand === "seven"),
-      emart: products?.products?.filter((product) => product.brand === "emart"),
+      cu: products?.seeProducts?.filter((product) => product.brand === "cu"),
+      gs: products?.seeProducts?.filter((product) => product.brand === "gs"),
+      seven: products?.seeProducts?.filter(
+        (product) => product.brand === "seven"
+      ),
+      emart: products?.seeProducts?.filter(
+        (product) => product.brand === "emart"
+      ),
     });
   }, [products]);
 
@@ -68,7 +74,9 @@ export default ({
       let categorySelect = item.querySelector(".categorySelect");
       category = categorySelect?.options[categorySelect?.selectedIndex].value;
       try {
-        const editedProd = await editProduct({ variables: { id, category } });
+        const editedProd = await editProduct({
+          variables: { id: parseInt(id), category },
+        });
         console.log(" editedProd", editedProd);
       } catch (error) {
         console.log(error);
@@ -115,6 +123,8 @@ export default ({
     console.log(" deleteHandler ~ deielte", deielte);
   };
 
+  const search = useInput("");
+
   const prodListProps = {
     selectedBrands,
     insertData,
@@ -133,6 +143,7 @@ export default ({
     productModal,
     setProductModal,
     clickedProps,
+    search,
   };
   return <ProdListPresenter {...prodListProps} />;
 };

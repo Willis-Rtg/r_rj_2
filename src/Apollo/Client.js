@@ -22,14 +22,15 @@ const resolvers = {
 };
 
 export default new ApolloClient({
-  uri: "https://r-prisma.herokuapp.com/",
+  uri: "http://localhost:4001",
+  // "https://r-prisma.herokuapp.com/",
   // : "https://eu1.prisma.sh/kshwan1023-33bb1f/r_prisma/dev",
   clientState: {
     defaults,
     resolvers,
   },
   headers: {
-    Authorization: `Bearer ${localStorage.getItem("token")}`,
+    token: `${localStorage.getItem("token")}`,
     SetCookie: "HttpOnly;Secure;SameSite=Strict",
   },
 });

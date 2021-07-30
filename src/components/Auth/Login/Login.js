@@ -28,61 +28,42 @@ const SendBtn = styled.button`
   }
 `;
 
-export default ({ email, password }) => {
-  // const [sendMail] = useMutation(SEND_MAIL, {
-  //   variables: { email: email.value },
-  // });
+export default ({ username, password, setLoginModal }) => {
   const [loginUser] = useMutation(LOGIN_USER, {
-    variables: { email: email.value, password: password.value },
+    variables: { username: username.value, password: password.value },
   });
   const [localLogin] = useMutation(LOCAL_LOG_IN);
   const onSubmit_email = async (e) => {
     e.preventDefault();
-    if (email.value !== "") {
-      try {
-        // const {
-        //   data: { sendMail: sendSecret },
-        // } = await sendMail();
-        // if (!sendSecret) throw Error("have the error for sending secret");
-        const {
-          data: { loginUser: token },
-        } = await loginUser();
-        if (token) {
-          localLogin({ variables: { token } });
-          toast.success("Success to log in");
-          window.location.href = "/";
-        } else throw Error();
-      } catch (e) {
-        console.log(e);
-        toast.error("have a error");
-      }
+    if (username.value !== "") {
+      const {
+        data: {
+          loginUser: { ok, token, error },
+        },
+      } = await loginUser();
+
+      if (!ok) return toast.error(error);
+      localLogin({ variables: { token } });
+      toast.success("Success to log in");
+      setLoginModal(false);
+      window.location.href = "/";
     }
   };
 
-  // async function onSubmit_secret(e) {
-  //   e.preventDefault();
-  //   if (email.value && password.value)
-  //     try {
-  //       const {
-  //         data: { loginUser: token },
-  //       } = await loginUser();
-  //       if (token) {
-  //         localLogin({ variables: { token } });
-  //         window.location.href = "/";
-  //       } else throw Error();
-  //     } catch (e) {
-  //       console.log(e);
-  //     }
-  // }
-
   return (
-    <LoginForm onSubmit={onSubmit_email}>
-      <Input name="email" type="email" placeholder="이메일" {...email} />
+    <LoginForm onSubmit={onSubmit_email} autoComplete="new-off">
+      <Input
+        name="username"
+        placeholder="아이디"
+        {...username}
+        autoComplete="new-off"
+      />
       <Input
         name="password"
         type="password"
         placeholder="비밀번호"
         {...password}
+        autoComplete="new-off"
       />
       <SendBtn type="submit">
         <FontAwesomeIcon icon={faPaperPlane} color="#33a2c4" />

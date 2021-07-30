@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Product from "../Product";
 import Loader from "../Loader";
 import ProductModal from "../Modal/ProductModal";
+import Input from "../Input";
 
 const Container = styled.div`
   display: flex;
@@ -11,7 +12,7 @@ const Container = styled.div`
   align-items: flex-start;
   flex-grow: 1;
   width: 100%;
-  padding-top: 20px;
+  padding-top: 1vh;
 `;
 const ShowHide = styled.div`
   display: flex;
@@ -104,6 +105,15 @@ const ApiDatas = styled.div`
   flex-wrap: wrap;
   position: relative;
 `;
+const Search = styled(Input)`
+  background-color: transparent;
+  margin-bottom: 1vh;
+  height: 2vh;
+  min-height: 25px;
+  align-self: center;
+  text-align: center;
+  font-size: 1rem;
+`;
 
 export default ({
   selectedBrands,
@@ -123,6 +133,7 @@ export default ({
   productModal,
   setProductModal,
   clickedProps,
+  search,
 }) => {
   let prodProps;
   const setProdProps = (name, img, event, price) => {
@@ -153,6 +164,7 @@ export default ({
         {apiData?.loading && <Loader />}
       </ShowHide>
       <ProductListWrapper>
+        <Search placeholder="검색" {...search} />
         <ProductList>
           {mode === "USER" &&
             selectedBrands.map((selectedBrand, index) => {
@@ -161,7 +173,7 @@ export default ({
                   <SortedBrandTitle selectedBrand={selectedBrand}>
                     {selectedBrand}
                   </SortedBrandTitle>
-                  {products?.products
+                  {products?.seeProducts
                     ?.filter((product) => product.brand === selectedBrand)
                     ?.filter((product) => {
                       switch (selectedCategory) {
@@ -201,13 +213,18 @@ export default ({
                           return product;
                       }
                     })
+                    ?.filter((product) => {
+                      let name = product.name;
+                      if (name.includes(search.value)) return product;
+                    })
                     ?.map((product, index) => {
                       return (
                         <ProductClass
                           className="product"
                           onClick={(e) => onProduct(e)}
+                          key={index}
                         >
-                          <Product {...product} key={index} />
+                          <Product {...product} />
                         </ProductClass>
                       );
                     })}
@@ -228,12 +245,12 @@ export default ({
                   <SortedBrandTitle selectedBrand={selectedBrand}>
                     {selectedBrand}
                   </SortedBrandTitle>
-                  {products?.products
+                  {products?.seeProducts
                     ?.filter((product) => product.brand === selectedBrand)
                     ?.map((product, index) => {
                       return (
-                        <SetCategory className="product">
-                          <Product {...product} key={index} />
+                        <SetCategory className="product" key={index}>
+                          <Product {...product} />
                           <CategorySelect
                             className="categorySelect"
                             tabIndex={0}
@@ -292,8 +309,8 @@ export default ({
                     item.querySelector(".price")?.textContent
                   );
                 return (
-                  <ProductClass className="product">
-                    <Product key={index} {...prodProps} />
+                  <ProductClass className="product" key={index}>
+                    <Product {...prodProps} />
                   </ProductClass>
                 );
               })}

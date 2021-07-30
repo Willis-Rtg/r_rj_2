@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import HomePresenter from "./HomePresenter";
-import { useQuery } from "@apollo/react-hooks";
-import { ME } from "./HomeQueries";
 import getConvenience from "../../api/api";
 
 const USER_ROLE = "USER";
 // const ADMIN_ROLE = "ADMIN";
 
 const HomeContainer = () => {
-  const { data: loginData, loading: loginLoading } = useQuery(ME);
   const [mode, setMode] = useState(USER_ROLE);
   const [selectedBrands, setSelectedBrands] = useState(["cu"]);
   const [selectedCategory, setSelectedCategory] = useState(0);
@@ -28,9 +25,8 @@ const HomeContainer = () => {
         });
   };
   const onCategory = (e, index) => {
-    const catoegries = e.currentTarget.parentElement.querySelectorAll(
-      ".category"
-    );
+    const catoegries =
+      e.currentTarget.parentElement.querySelectorAll(".category");
     catoegries.forEach((category) => category.classList.remove("onCategory"));
     e.currentTarget.classList.add("onCategory");
     setSelectedCategory(index);
@@ -66,8 +62,6 @@ const HomeContainer = () => {
   const props = {
     loginModal,
     setLoginModal,
-    loginData,
-    loginLoading,
     callApi,
     apiData,
     mode,

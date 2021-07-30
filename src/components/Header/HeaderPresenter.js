@@ -66,7 +66,8 @@ export default ({
 }) => {
   return (
     <Conatiner>
-      {(loginData?.me.role === "ADMIN" || loginData?.me.role === "MANAGER") && (
+      {(loginData?.me?.role === "ADMIN" ||
+        loginData?.me?.role === "MANAGER") && (
         <ModeButton>
           <Button onClick={changeMode}>{mode}</Button>
         </ModeButton>
@@ -75,9 +76,9 @@ export default ({
         <Title> 알뜰.편 </Title>
         <LoginWrapper>
           <Button
-            onClick={loginData ? logoutHandler : () => setLoginModal(true)}
+            onClick={loginData?.me ? logoutHandler : () => setLoginModal(true)}
           >
-            {loginData ? <Logout /> : <Login />}
+            {loginData?.me ? <Logout /> : <Login />}
           </Button>
         </LoginWrapper>
       </AppTitle>

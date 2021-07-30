@@ -28,17 +28,17 @@ const SendBtn = styled.button`
   }
 `;
 
-export default ({ email, name, password, password_confirm, setAction }) => {
+export default ({ email, username, password, setAction }) => {
   const [createUser] = useMutation(CREATE_USER, {
     variables: {
       email: email.value,
-      name: name.value,
+      username: username.value,
       password: password.value,
     },
   });
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (email && name)
+    if (email && username)
       try {
         const {
           data: { createUser: newUser },
@@ -52,19 +52,13 @@ export default ({ email, name, password, password_confirm, setAction }) => {
   };
   return (
     <LoginForm onSubmit={onSubmit}>
-      <Input name="name" type="text" placeholder="닉네임" {...name} />
+      <Input name="username" type="text" placeholder="닉네임" {...username} />
       <Input name="email" type="email" placeholder="이메일" {...email} />
       <Input
         name="password"
         type="password"
         placeholder="비밀번호"
         {...password}
-      />
-      <Input
-        name="password_confirm"
-        type="password"
-        placeholder="비밀번호 확인"
-        {...password_confirm}
       />
       <SendBtn type="submit">
         <FontAwesomeIcon icon={faPaperPlane} color="#33a2c4" />

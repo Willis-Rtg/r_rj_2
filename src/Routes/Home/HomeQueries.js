@@ -31,7 +31,8 @@ export const PRODUCTS = gql`
 export const ME = gql`
   query me {
     me {
-      name
+      id
+      username
       email
       role
     }

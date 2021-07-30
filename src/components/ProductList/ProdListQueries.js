@@ -7,8 +7,6 @@ export const CREATE_PRODUCT = gql`
     $event: String!
     $price: String!
     $img: String!
-    $category: String
-    $description: String!
   ) {
     createProduct(
       name: $name
@@ -16,24 +14,16 @@ export const CREATE_PRODUCT = gql`
       event: $event
       price: $price
       img: $img
-      category: $category
-      description: $description
     ) {
-      id
-      name
-      brand
-      event
-      price
-      img
-      category
-      description
+      ok
+      error
     }
   }
 `;
 
-export const PRODUCTS = gql`
-  query products($brand: [String], $category: String, $event: String) {
-    products(brand: $brand, category: $category, event: $event) {
+export const SEE_PRODUCTS = gql`
+  query seeProducts($brand: [String], $category: Category, $event: String) {
+    seeProducts(brand: $brand, category: $category, event: $event) {
       id
       name
       img
@@ -46,11 +36,10 @@ export const PRODUCTS = gql`
 `;
 
 export const UPDATE_PRODUCT = gql`
-  mutation updateProducts($id: String, $category: String) {
-    updateProducts(id: $id, category: $category) {
-      name
-      brand
-      category
+  mutation updateProduct($id: Int!, $category: Category) {
+    updateProduct(id: $id, category: $category) {
+      ok
+      error
     }
   }
 `;
@@ -58,7 +47,7 @@ export const UPDATE_PRODUCT = gql`
 export const DELETE_PRODUCTS = gql`
   mutation deleteProducts($brand: String) {
     deleteProducts(brand: $brand) {
-      count
+      ok
     }
   }
 `;

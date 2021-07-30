@@ -79,12 +79,11 @@ const ForLogin = styled.p`
 
 const LoginModal = ({ setLoginModal }) => {
   const email = useInput("");
-  const name = useInput("");
+  const username = useInput("");
   const password = useInput("");
-  const password_confirm = useInput("");
   const [action, setAction] = useState(true);
-  const loginProps = { email, password };
-  const joinProps = { email, name, password, password_confirm, setAction };
+  const loginProps = { username, password, setLoginModal };
+  const joinProps = { email, username, password, setAction };
   return (
     <ModalBg>
       <ModalWrapper>

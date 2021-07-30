@@ -1,9 +1,11 @@
 import React from "react";
 import HeaderPresenter from "./HeaderPresenter";
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useQuery } from "@apollo/react-hooks";
 import { LOCAL_LOG_OUT } from "./HeaderQueries";
+import { ME } from "../../Routes/Home/HomeQueries";
 
-export default ({ loginModal, setLoginModal, loginData, mode, setMode }) => {
+export default ({ loginModal, setLoginModal, mode, setMode }) => {
+  const { data: loginData } = useQuery(ME);
   const changeMode = (e) => {
     e.preventDefault();
     if (mode === "USER") setMode("ADMIN");
