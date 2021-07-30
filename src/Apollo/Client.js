@@ -22,7 +22,10 @@ const resolvers = {
 };
 
 export default new ApolloClient({
-  uri: "http://localhost:4001",
+  uri:
+    process.env.NODE_ENV === "production"
+      ? "https://r-back.herokuapp.com/"
+      : "http://localhost:4001",
   // "https://r-prisma.herokuapp.com/",
   // : "https://eu1.prisma.sh/kshwan1023-33bb1f/r_prisma/dev",
   clientState: {
